@@ -1,0 +1,31 @@
+<div class="container">
+	<div class="row">
+		<div class="col-lg-4">
+			<h5>講義一覧</h5>
+		</div>
+		<div class="col-lg-8">
+		</div>
+	</div>
+	<div class="row">
+		<table class="table table-hover table-inverse">
+			<thead>
+				<tr class="table-active">
+					<th>画像</th>
+					<th>講義名</th>
+					<th>主催大学</th>
+					<th>お気に入り総数</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @lectures.each do |lecture| %>
+					<tr data-href="<%= admin_lecture_path(lecture.id) %>">
+						<td></td>
+						<td><%= lecture.name %></td>
+						<td><%= lecture.university.name %></td>
+						<td></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>

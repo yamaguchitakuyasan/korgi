@@ -1,6 +1,7 @@
 class Admin::LecturesController < ApplicationController
 
 	def index
+		@lectures = Lecture.all
 	end
 
 	def new
@@ -14,12 +15,18 @@ class Admin::LecturesController < ApplicationController
 	end
 
 	def show
+		@lecture = Lecture.find(params[:id])
+		@university = @lecture.university
 	end
 
 	def edit
+		@lecture = Lecture.find(params[:id])
 	end
 
 	def update
+		lecture = Lecture.find(params[:id])
+		lecture.update(lecture_params)
+		redirect_to admin_lecture_path(lecture.id)
 	end
 
 	def destroy
@@ -27,7 +34,7 @@ class Admin::LecturesController < ApplicationController
 
 	private
 	def lecture_params
-		params.require(:lecture).permit(:name, :lecture_image, :top_message, :description, :held_at, :university_id)
+		params.require(:lecture).permit(:name, :lecture_image, :top_message, :description, :held_at, :university_id, :tag_list)
 	end
 
 end
