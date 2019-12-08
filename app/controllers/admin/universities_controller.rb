@@ -15,6 +15,9 @@ class Admin::UniversitiesController < ApplicationController
 	end
 
 	def update
+		university = University.find(params[:id])
+		university.update(university_params)
+		redirect_to admin_universities_path
 	end
 
 	private
