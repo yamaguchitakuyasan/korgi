@@ -84,4 +84,4 @@ gem "geocoder"
 
 gem 'geokit'
 
-gem 'acts-as-taggable-on', '~> 4.0'
+gem 'acts-as-taggable-on', '~> 6.0'

@@ -1,0 +1,53 @@
+
+	<div class="row">
+		<div class="col"></div>
+		 	<div class="col-lg-8">
+
+		 		<h5>講義編集</h5>
+
+		 		<!-- 講義編集 -->
+		 		<%= form_for(@lecture, url:admin_lecture_path) do |f| %>
+		 			<div class="filed">
+		 				<label for="lecture_name"></label>
+		 					<%= f.text_field :name, :placeholder => "講義名
+		 					" %>
+		 			</div>
+
+		 			<div class="field">
+		 				<label for="lecture_image">
+		 					<%= f.attachment_field :lecture_image %>
+		 			</div>
+
+		 			<div class="field">
+		 				<label for="lecture_top_message"></label>
+		 					<%= f.text_field :top_message, :placeholder =>"トップメッセージ" %>
+		 			</div>
+
+		 			<div class="field">
+		 				<label for="lecture_description"></label>
+		 					<%= f.text_area :description, :placeholder => "講義説明" %>
+		 			</div>
+
+		 			<div class="field">
+		 				<label for="lecture_held_at"></label>
+		 					<%= f.datetime_select :held_at, {}, class: 'form-control' %>
+		 			</div>
+
+		 			<div class="field">
+		 				<label for="lecture_university"></label>
+		 					<%= f.collection_select :university_id, University.all,:id, :name, :prompt => "選択してください" %>
+		 			</div>
+
+		 			<div class="field">
+		 				<label for="tag_list"></label>
+		 					<%= f.text_field :tag_list, value: @lecture.tag_list.join(','), class: "form-control",:placeholder => "example:経営,起業" %>
+		 			</div>
+
+		 			<div class="actions">
+		 				<%= f.submit '更新', :class=>"btn btn-lg" %>
+		 			</div>
+		 		<% end %>
+
+		 	</div>
+		<div class="col"></div>
+	</div>

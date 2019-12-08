@@ -12,6 +12,13 @@
 	<!-- 大学名・所在地 -->
 	<div class="row">
 		<%= form_for(@university, url:"/admin/universities/#{@university.id}") do |f| %>
+		<div class="col-lg-5">
+			<%= attachment_image_tag(@university, :university_image, size:'40x40', fallback: "no_image.png", class:"img-thumbnail") %>
+			<div class="field">
+				<%= f.attachment_field :university_image %>
+			</div>
+		</div>
+		<div class="col-lg-7">
 			<div class="field">
 				<%= f.text_field :name %>
 			</div>
@@ -21,6 +28,7 @@
 			<div class="action">
 				<%= f.submit '更新', :class=>"btn btn-lg" %>
 			</div>
+		</div>
 		<% end %>
 	</div>
 	<!-- 地図 -->
