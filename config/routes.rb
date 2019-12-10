@@ -15,4 +15,6 @@ Rails.application.routes.draw do
   	resources :universities, :lectures
   end
 
+  root to: 'lectures#index'
+
 end
