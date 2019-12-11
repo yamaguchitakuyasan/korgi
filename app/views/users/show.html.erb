@@ -1,0 +1,32 @@
+<span><%= link_to" logout", destroy_user_session_path, { method: :delete, class: "glyphicon glyphicon-log-out"} %></span>
+
+<div class="container">
+	<div class="row">
+		<!-- プロフィール -->
+		<div class="col-lg-6 text-center">
+			<div class="profile-header">
+				<h4>プロフィール</h4>
+
+				<div class="user_name">ユーザ名</div>
+				<span><%= @user.name %></span>
+
+				<div class="メールアドレス">e-mail</div>
+				<span><%= @user.email %></span>
+
+				<div class="former_university">出身大学</div>
+				<span><%= @user.former_university %></span>
+
+				<div class="major">専攻</div>
+				<span><%= @user.major %></span>
+
+				<% if @user.id == current_user.id %>
+					<span><%= link_to "アカウントを編集する", edit_user_path(@user) %></span>
+				<% end %>
+
+			</div>
+		</div>
+		<!-- クレジットカード -->
+		<div class="col-lg-6">
+		</div>
+	</div>
+</div>
