@@ -7,46 +7,46 @@
 					<h4><%= @lecture.name %></h4>
 
 					<% if current_user %>
-
-					<% if @lecture.favorited_by?(current_user) %>
-					<li>
-						<%= link_to lecture_favorites_path(@lecture), method: :delete do %>
-						お気に入り解除
-						<i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+						<% if @lecture.held_at > Date.today %>
+							<% if @lecture.favorited_by?(current_user) %>
+								<li>
+									<%= link_to lecture_favorites_path(@lecture), method: :delete do %>
+										お気に入り解除
+									<i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+									<% end %>
+								</li>
+							<% else %>
+								<li>
+									<%= link_to lecture_favorites_path(@lecture), method: :post do %>
+									<i class="fa fa-heart-o" aria-hidden="true"></i>
+									お気に入りに入れる
+									<% end %>
+								</li>
+							<% end %>
 						<% end %>
-					</li>
-					<% else %>
-					<li>
-						<%= link_to lecture_favorites_path(@lecture), method: :post do %>
-						<i class="fa fa-heart-o" aria-hidden="true"></i>
-						お気に入りに入れる
-						<% end %>
-					</li>
 					<% end %>
 
-					<% end %>
-
-					<h6><%= @lecture.held_at %></h6>
+					<h6><%= @lecture.held_at.strftime("%Y-%m-%d %H:%M") %></h6>
 				</div>
 
 				<div class="col-lg-7">
 
 					<% if current_user %>
-
-					<% if @lecture.reserved_by?(current_user) %>
-					<li>
-						<%= link_to lecture_reservations_path(@lecture), method: :delete do %>
-						予約を解除
+						<% if @lecture.held_at > Date.today %>
+							<% if @lecture.reserved_by?(current_user) %>
+								<li>
+									<%= link_to lecture_reservations_path(@lecture), method: :delete do %>
+									予約を解除
+									<% end %>
+								</li>
+							<% else %>
+								<li>
+									<%= link_to lecture_reservations_path(@lecture),method: :post do %>
+									予約する
+									<% end %>
+								</li>
+							<% end %>
 						<% end %>
-					</li>
-					<% else %>
-					<li>
-						<%= link_to lecture_reservations_path(@lecture),method: :post do %>
-						予約する
-						<% end %>
-					</li>
-					<% end %>
-
 					<% end %>
 
 				</div>

@@ -22,6 +22,6 @@ class Admin::UniversitiesController < ApplicationController
 
 	private
 	def university_params
-		params.require(:university).permit(:name, :location)
+		params.require(:university).permit(:name, :location, :university_image)
 	end
 end

@@ -26,9 +26,15 @@ class UsersController < ApplicationController
 	end
 	end
 
+	def mykorgi
+		@user = current_user
+		@reservations = @user.reservations
+		@favorites = @user.favorites
+	end
+
 	private
 	def user_params
-		params.require(:user).permit(:name, :email, :former_university, :major)
+		params.require(:user).permit(:name, :email, :former_university, :major, :profile_image)
 	end
 
 end

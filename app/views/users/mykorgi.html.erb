@@ -1,0 +1,56 @@
+<div class="container">
+
+	<div class="row">
+
+		<div class="col"></div>
+
+		<div class="col-lg-10">
+
+			<div class="col text-center">
+				<h3>my korgi</h3>
+			</div>
+
+			<!-- トップ -->
+			<div class="row user_information">
+				<div class="col-lg-6">
+					<h6><%= @user.name %></h6>
+				</div>
+				<div class="col-lg-6">
+					<h6>受講した講義数</h6>
+				</div>
+			</div>
+
+			<!-- 予約講義 -->
+			<div class="row reserved_lecture">
+				<% @reservations.each do |reservation| %>
+					<% if reservation.lecture.held_at > Date.today %>
+						<span><%= reservation.lecture.name %></span>
+					<% end %>
+				<% end %>
+			</div>
+
+			<!--　お気に入り講義 -->
+			<div class="row favorited_lecture">
+				<% @favorites.each do |favorite| %>
+					<span><%= favorite.lecture.name %></span>
+				<% end %>
+			</div>
+
+			<!-- 受講済講義　-->
+			<div class="row attended_lecture">
+				<% @reservations.each do |reservation| %>
+					<% if reservation.lecture.held_at < Date.today %>
+						<span><%= reservation.lecture.name %></span>
+					<% end %>
+				<% end %>
+			</div>
+
+
+		</div>
+
+		<div class="col"></div>
+
+	</div>
+
+</div>
+

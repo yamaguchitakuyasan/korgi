@@ -29,6 +29,8 @@ Rails.application.routes.draw do
 
   get 'home/about'
 
+  get 'users/:id/mykorgi' => 'users#mykorgi', as: "mykorgi"
+
 
 
 end
