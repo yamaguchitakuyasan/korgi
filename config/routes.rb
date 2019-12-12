@@ -17,16 +17,18 @@ Rails.application.routes.draw do
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   namespace :admin do
-  	resources :universities, :lectures
+    resources :universities, :lectures
   end
 
-  root 'home#index'
+  resources :lectures, only: [:index, :show] do
+    resource :favorites, only: [:create, :destroy]
+    resource :reservations, only: [:create, :destroy]
+  end
+
+  root to: 'home#index'
 
   get 'home/about'
 
-  resources :lectures
-
-  resource :favorites, only: [:create, :destroy]
 
 
 end
