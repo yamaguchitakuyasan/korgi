@@ -34,6 +34,7 @@
 			<table class="table table-hover table-inverse">
 				<thead>
 					<tr class="table-avtive">
+						<th></th>
 						<th>大学名</th>
 						<th>大学住所</th>
 						<th colspan="3"></th>
@@ -42,6 +43,7 @@
 				<tbody>
 					<% @universities.each do |university| %>
 						<tr data-href="<%= edit_admin_university_path(university.id) %>">
+							<td><%= attachment_image_tag(@university, :university_image, size:'100x100', fallback: "no_image.png", class:"img-thumbnail") %></td>
 							<td><%= university.name %></td>
 							<td><%= university.location %></td>
 						</tr>

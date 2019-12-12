@@ -5,7 +5,7 @@
 			<div class="row top">
 				<div class="col-lg-5">
 					<h4><%= @lecture.name %></h4>
-					<h6><%= @lecture.held_at %></h6>
+					<h6><%= @lecture.held_at.strftime("%Y-%m-%d %H:%M") %></h6>
 				</div>
 				<div class="col-lg-4">
 					<% if @lecture.active_flag == true %>
