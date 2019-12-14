@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   has_many :favorites, dependent: :destroy
   has_many :reservations, dependent: :destroy
+  has_one :payment, dependent: :destroy
+  has_one :card, dependent: :destroy
 
   attachment :profile_image
 

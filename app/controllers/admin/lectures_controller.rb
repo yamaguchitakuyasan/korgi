@@ -16,6 +16,7 @@ class Admin::LecturesController < ApplicationController
 
 	def show
 		@lecture = Lecture.find(params[:id])
+		@reservations = @lecture.reservations
 		@university = @lecture.university
 	end
 

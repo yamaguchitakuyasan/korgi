@@ -10,18 +10,26 @@ class UsersController < ApplicationController
 
 	def show
 		@user = current_user
+		@payment = @user.payment
+		@card = @user.card
+	if @card.present?
+		card = Card.where(user_id: current_user.id).first
+		Payjp.api_key = "sk_test_b4e2abe16da21b4ecbb6a9b5"
+  		customer = Payjp::Customer.retrieve(card.customer_id)
+  		@default_card_information = customer.cards.retrieve(card.card_id)
+  	end
 	end
 
 	def edit
 		@user = User.find(params[:id])
-	if @user != current_user
-            redirect_to user_path(current_user)
+	if  @user != current_user
+        redirect_to user_path(current_user)
         end
 	end
 
 	def update
 		user = User.find(params[:id])
-	if user.update(user_params)
+	if  user.update(user_params)
 		redirect_to user_path
 	end
 	end

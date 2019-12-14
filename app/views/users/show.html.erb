@@ -3,32 +3,85 @@
 <div class="container">
 	<div class="row">
 		<!-- プロフィール -->
-		<div class="col-lg-6 text-center">
-			<div class="profile-header">
+		<div class="col-lg-6">
+			<div class="profile-header text-center">
 				<h4>プロフィール</h4>
 
 				<%= attachment_image_tag(@user, :profile_image, size:'200x200', fallback: "no_image.png", class:"img-thumbnail rounded-circle") %>
 
-				<div class="user_name">ユーザ名</div>
-				<span><%= @user.name %></span>
+			</div>
 
-				<div class="メールアドレス">e-mail</div>
-				<span><%= @user.email %></span>
+				<div class="user-name">ユーザ名
+					<span><%= @user.name %></span>
+				</div>
 
-				<div class="former_university">出身大学</div>
-				<span><%= @user.former_university %></span>
+				<div class="email">メールアドレス<span>
+					<%= @user.email %></span>
+				</div>
 
-				<div class="major">専攻</div>
-				<span><%= @user.major %></span>
+				<div class="former-university">出身大学
+					<span><%= @user.former_university %></span>
+				</div>
+
+				<div class="major">専攻
+					<span><%= @user.major %></span>
+				</div>
 
 				<% if @user.id == current_user.id %>
-					<span><%= link_to "アカウントを編集する", edit_user_path(@user) %></span>
+					<%= link_to "アカウントを編集する", edit_user_path(@user) %>
 				<% end %>
 
-			</div>
 		</div>
 		<!-- クレジットカード -->
 		<div class="col-lg-6">
+			<div class="payment-header text-center">
+				<h4>お支払い情報</h4>
+			</div>
+
+			<div class="row payment-information">
+				<div class="col-lg-6">
+					<span>お支払い金額</span>
+				</div>
+				<div class="col-lg-6">
+					<span>お支払い方法</span>
+					<div class="card-top">
+						<span>クレジットカード情報</span>
+
+						<% if @card.present? %>
+						<div class="card-infofmation">
+							<%= "**** **** **** " + @default_card_information.last4 %>
+							<br>
+							<% exp_month = @default_card_information.exp_month.to_s %>
+							<% exp_year = @default_card_information.exp_year.to_s.slice(2,3) %>
+						    <%= exp_month + " / " + exp_year %>
+
+						</div>
+						<% else %>
+						<div class="card-registration">
+							<span>現在、有効なカード情報が登録されていません。定期課金を開始するにはカード登録が必要です。</span>
+							<%= link_to("カードを登録する", new_card_path, {class: "btn btn-lg"}) %>
+						</div>
+						<% end %>
+					</div>
+
+					<% if @payment.present? %>
+						<% if @payment.active == true %>
+							hello
+						<% else %>
+							<div class="payment-registration">
+							<%= link_to "有料登録する", pay_path, method: :post %>
+							</div>
+						<% end %>
+					<% else %>
+						<div class="payment-registration">
+						<%= link_to "有料登録する", pay_path, method: :post %>
+						</div>
+					<% end %>
+
+				</div>
+			</div>
+
+
 		</div>
 	</div>
 </div>

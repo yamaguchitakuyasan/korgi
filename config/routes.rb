@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
   get 'card/new'
-  get 'card/show'
   get 'home/index'
 
   devise_for :admins, controllers: {
@@ -19,7 +18,7 @@ Rails.application.routes.draw do
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   namespace :admin do
-    resources :universities, :lectures
+    resources :universities, :lectures, :users
   end
 
   resources :lectures, only: [:index, :show] do
@@ -39,7 +38,9 @@ Rails.application.routes.draw do
     post 'pay', to: 'card#pay'
     post 'delete', to: 'card#delete'
   end
-end
+  end
+
+  post 'pay', to: 'payment#pay'
 
 
 end
