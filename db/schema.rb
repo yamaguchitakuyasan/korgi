@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_12_042044) do
+ActiveRecord::Schema.define(version: 2019_12_12_150402) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -24,9 +24,23 @@ ActiveRecord::Schema.define(version: 2019_12_12_042044) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "cards", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "customer_id", null: false
+    t.string "card_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id"
     t.integer "lecture_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "fees", force: :cascade do |t|
+    t.integer "price", default: 10000
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -44,6 +58,14 @@ ActiveRecord::Schema.define(version: 2019_12_12_042044) do
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_lectures_on_name"
     t.index ["university_id"], name: "index_lectures_on_university_id"
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "fee_id"
+    t.boolean "active", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "professors", force: :cascade do |t|
