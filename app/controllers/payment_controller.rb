@@ -18,13 +18,13 @@ class PaymentController < ApplicationController
   end
 
   def update
-  	payment = Payment.find(params[:id])
-  if payment.active == true
-  	payment.update(active: false)
-  	redirect_to user_path(current_user)
+  	@payment = Payment.find(params[:id])
+  if @payment.active == true
+  	 @payment.update(active: false)
+  	 redirect_to user_path(current_user)
   else
-  	payment.update(active: true)
-  	redirect_to user_path(current_user)
+  	 @payment.update(active: true)
+  	 redirect_to user_path(current_user)
   end
   end
 

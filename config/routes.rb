@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
   get 'card/new'
-  get 'home/index'
 
   devise_for :admins, controllers: {
   	sessions: 'admins/sessions',
@@ -40,7 +39,7 @@ Rails.application.routes.draw do
   end
   end
 
-  post 'pay', to: 'payment#pay'
-
+  post 'payment', to: 'payment#pay'
+  patch 'payment/:id', to: 'payment#update', as: "payupdate"
 
 end
