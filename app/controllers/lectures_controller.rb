@@ -7,7 +7,7 @@ class LecturesController < ApplicationController
 	def show
 		@lecture = Lecture.find(params[:id])
 		@university = @lecture.university
-		@payment = current_user.payment
+		@payment_created_at = Payment.where(user_id: current_user.id).maximum(:created_at)
 	end
 
 	def update

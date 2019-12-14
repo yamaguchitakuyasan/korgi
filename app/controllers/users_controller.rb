@@ -10,6 +10,7 @@ class UsersController < ApplicationController
 
 	def show
 		@user = current_user
+		@payment_created_at = Payment.where(user_id: current_user.id).maximum(:created_at)
 		@payment = @user.payment
 		@card = @user.card
 	if @card.present?
