@@ -31,8 +31,7 @@
 
 					<% if current_user %>
 						<% if @lecture.held_at > Time.current %>
-							<% if @payment.present? %>
-								<% if @payment.active == true %>
+							<% if @payment_created_at > Date.today.ago(30.days) %>
 									<% if @lecture.reserved_by?(current_user) %>
 									<%= link_to lecture_reservations_path(@lecture), method: :delete do %>
 									予約を解除
@@ -42,11 +41,8 @@
 									予約する
 									<% end %>
 									<% end %>
-								<% else %>
-								有料登録する
-								<% end %>
 							<% else %>
-							有料登録する
+							<%= link_to "有料登録する", user_path(current_user) %>
 							<% end %>
 						<% else %>
 						予約期間外です

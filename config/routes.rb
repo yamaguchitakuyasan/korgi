@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'card/new'
-  get 'home/index'
-
   devise_for :admins, controllers: {
   	sessions: 'admins/sessions',
   	passwords: 'admins/passwords',
@@ -34,13 +31,12 @@ Rails.application.routes.draw do
 
   resources :card, only: [:new, :show] do
   collection do
-    post 'show', to: 'card#show'
     post 'pay', to: 'card#pay'
     post 'delete', to: 'card#delete'
   end
   end
 
-  post 'pay', to: 'payment#pay'
-
+  post 'payment', to: 'payment#pay'
+  patch 'payment/:id', to: 'payment#update', as: "payupdate"
 
 end

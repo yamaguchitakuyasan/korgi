@@ -1,3 +1,5 @@
+<%= render 'users/user_header' %>
+
 <span><%= link_to" logout", destroy_user_session_path, { method: :delete, class: "glyphicon glyphicon-log-out"} %></span>
 
 <div class="container">
@@ -48,35 +50,43 @@
 						<span>クレジットカード情報</span>
 
 						<% if @card.present? %>
-						<div class="card-infofmation">
-							<%= "**** **** **** " + @default_card_information.last4 %>
-							<br>
-							<% exp_month = @default_card_information.exp_month.to_s %>
-							<% exp_year = @default_card_information.exp_year.to_s.slice(2,3) %>
-						    <%= exp_month + " / " + exp_year %>
-
-						</div>
+							<div class="card-infofmation">
+								<%= "**** **** **** " + @default_card_information.last4 %>
+									<br>
+									<% exp_month = @default_card_information.exp_month.to_s %>
+									<% exp_year = @default_card_information.exp_year.to_s.slice(2,3) %>
+								    <%= exp_month + " / " + exp_year %>
+							    	<br>
+							   	<%= link_to "カードを削除する", delete_card_index_path, method: :post %>
+							</div>
 						<% else %>
-						<div class="card-registration">
-							<span>現在、有効なカード情報が登録されていません。定期課金を開始するにはカード登録が必要です。</span>
-							<%= link_to("カードを登録する", new_card_path, {class: "btn btn-lg"}) %>
-						</div>
-						<% end %>
-					</div>
-
-					<% if @payment.present? %>
-						<% if @payment.active == true %>
-							hello
-						<% else %>
-							<div class="payment-registration">
-							<%= link_to "有料登録する", pay_path, method: :post %>
+							<div class="card-registration">
+								<span>現在、有効なカード情報が登録されていません。定期課金を開始するにはカード登録が必要です。</span>
+								<%= link_to("カードを登録する", new_card_path, {class: "btn btn-lg"}) %>
 							</div>
 						<% end %>
-					<% else %>
-						<div class="payment-registration">
-						<%= link_to "有料登録する", pay_path, method: :post %>
-						</div>
-					<% end %>
+					</div>
+						<% if @payment.present? %>
+							<% if @payment_created_at > Date.today.ago(30.days) %>
+								<%= @payment_created_at.since(30.days).strftime("%Y年%m月%d日") %>まで利用可能です。
+							<% else %>
+								<% if @card.present? %>
+								<div class="payment-registration">
+								<%= link_to "有料登録する", payment_path, method: :post %>
+								</div>
+								<% else %>
+								カードを登録してください
+								<% end %>
+							<% end %>
+						<% else %>
+							<% if @card.present? %>
+								<div class="payment-registration">
+								<%= link_to "有料登録する", payment_path, method: :post %>
+								</div>
+							<% else %>
+								カードを登録してください
+							<% end %>
+						<% end %>
 
 				</div>
 			</div>
