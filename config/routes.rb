@@ -39,4 +39,6 @@ Rails.application.routes.draw do
   post 'payment', to: 'payment#pay'
   patch 'payment/:id', to: 'payment#update', as: "payupdate"
 
+  post 'lecture/current_location', to: 'lectures#current_location', as: 'current_location'
+
 end
