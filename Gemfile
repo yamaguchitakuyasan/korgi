@@ -87,3 +87,5 @@ gem 'geokit'
 gem 'acts-as-taggable-on', '~> 6.0'
 
 gem 'font-awesome-sass'
+
+gem 'http'
