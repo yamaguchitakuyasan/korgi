@@ -2,32 +2,57 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-lg-4">
-			<h5>講義一覧</h5>
-		</div>
-		<div class="col-lg-8">
-		</div>
-	</div>
-	<div class="row">
-		<table class="table table-hover table-inverse">
-			<thead>
-				<tr class="table-active">
-					<th>画像</th>
-					<th>講義名</th>
-					<th>主催大学</th>
-					<th>お気に入り総数</th>
-				</tr>
-			</thead>
-			<tbody>
-				<% @lectures.each do |lecture| %>
-					<tr data-href="<%= lecture_path(lecture.id) %>">
-						<td></td>
-						<td><%= lecture.name %></td>
-						<td><%= lecture.university.name %></td>
-						<td></td>
-					</tr>
+		<div class="col-lg-3">
+			<p>検索</p>
+			<div class="currentLocation">
+				<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWKdtZHy3XPl9RzmpRzPO3Jhql_tWeIU4&callback=initMap"></script>
+				<%= form_tag current_location_path, name: "user_location", method: :post do %>
+				<input type="hidden" id="lat" name="lat_number" value="">
+				<input type="hidden" id="lon" name="lon_number" value="">
+				<input type="button" id="location" value="現在地から検索する" onclick="getMyPlace()" >
 				<% end %>
-			</tbody>
-		</table>
+
+				<script>
+					function getMyPlace() {
+					  // var output = document.getElementById("result");
+					  if (!navigator.geolocation){
+					    output.innerHTML = "<p>Geolocationはあなたのブラウザーでサポートされておりません</p>";
+					    return;
+					  }
+					  function success(position) {
+					    var latitude  = position.coords.latitude;
+					    var longitude = position.coords.longitude;
+					    // output.innerHTML = '<p>緯度 ' + latitude + '° <br>経度 ' + longitude + '°</p>';
+					    document.getElementById( "lat" ).value = latitude ;
+					    document.getElementById( "lon" ).value = longitude ;
+					    document.user_location.submit();
+					  };
+					  function error() {
+					    output.innerHTML = "座標位置を取得できません";
+					  };
+					  navigator.geolocation.getCurrentPosition(success, error);
+					}
+				</script>
+
+			</div>
+		</div>
+
+		<div class="col-lg-9">
+			<h4>講義一覧</h4>
+			<div class="card-columns">
+				<% @lectures.each do |lecture| %>
+				<%= link_to lecture_path(lecture.id) do %>
+					<div class="card">
+						<img class="card-img-top">
+						<div class="card-body">
+							<h4 class="card-title"><%= lecture.name %></h4>
+							<h6 class="card-subtitle">主催大学：<%= lecture.university.name %></h6>
+							<h6 class="card-text"><%= lecture.favorites.count %>件のお気に入り</h6>
+						</div>
+					</div>
+				<% end %>
+				<% end %>
+			</div>
+		</div>
 	</div>
 </div>

@@ -5,6 +5,7 @@ class University < ApplicationRecord
 
 	attachment :university_image
 
+	geocoded_by :location
 	after_validation :geocode
 
 	private

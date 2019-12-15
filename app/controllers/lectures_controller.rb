@@ -10,7 +10,8 @@ class LecturesController < ApplicationController
 		@payment_created_at = Payment.where(user_id: current_user.id).maximum(:created_at)
 	end
 
-	def update
+	def current_location
+		redirect_to action: "index"
 	end
 
 end
