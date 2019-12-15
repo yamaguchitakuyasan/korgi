@@ -6,10 +6,11 @@
 			<p>検索</p>
 			<div class="currentLocation">
 				<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWKdtZHy3XPl9RzmpRzPO3Jhql_tWeIU4&callback=initMap"></script>
+
 				<%= form_tag current_location_path, name: "user_location", method: :post do %>
-				<input type="hidden" id="lat" name="lat_number" value="">
-				<input type="hidden" id="lon" name="lon_number" value="">
-				<input type="button" id="location" value="現在地から検索する" onclick="getMyPlace()" >
+					<input type="hidden" id="lat" name="lat_number" value="">
+					<input type="hidden" id="lon" name="lon_number" value="">
+					<input type="button" id="location" value="現在地から検索する" onclick="getMyPlace()" >
 				<% end %>
 
 				<script>
