@@ -66,8 +66,18 @@
 							</div>
 						<% end %>
 					</div>
-						<% if @payment_created_at > Date.today.ago(30.days) %>
+						<% if @payment.present? %>
+							<% if @payment_created_at > Date.today.ago(30.days) %>
 								<%= @payment_created_at.since(30.days).strftime("%Y年%m月%d日") %>まで利用可能です。
+							<% else %>
+								<% if @card.present? %>
+								<div class="payment-registration">
+								<%= link_to "有料登録する", payment_path, method: :post %>
+								</div>
+								<% else %>
+								カードを登録してください
+								<% end %>
+							<% end %>
 						<% else %>
 							<% if @card.present? %>
 								<div class="payment-registration">
@@ -76,7 +86,7 @@
 							<% else %>
 								カードを登録してください
 							<% end %>
-					<% end %>
+						<% end %>
 
 				</div>
 			</div>
