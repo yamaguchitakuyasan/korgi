@@ -1,38 +1,44 @@
-<div class="container">
+<div class="row">
+	<%= render partial: "admin/admin_header" %>
+		<!-- 大学登録 -->
+		<div class="col-lg-1">
+		</div>
+
 	<!-- トップ -->
-	<div class="row">
-		<div class="col-lg-7">
-			<h5>大学を編集する</h5>
-		</div>
-		<div class="col-lg-5">
-			<!-- <button type="button" class="btn btn-primary rounded-pill"><%= link_to "戻る", admin_universities_path %></button> -->
-		</div>
-	</div>
+		<div class="col-lg-8">
+			<div class="row">
+				<div class="col-lg-10">
+					<h3 class="my-3"><%= @university.name %></h3>
+				</div>
+			</div>
 
 	<!-- 大学名・所在地 -->
-	<div class="row">
 		<%= form_for(@university, url:"/admin/universities/#{@university.id}") do |f| %>
-		<div class="col-lg-5">
-			<%= attachment_image_tag(@university, :university_image, size:'300x300', fallback: "no_image.png", class:"img-thumbnail") %>
-			<div class="field">
-				<%= f.attachment_field :university_image %>
+		<div class="row">
+			<div class="col-lg-5">
+				<%= attachment_image_tag(@university, :university_image, size:'300x300', fallback: "no_image.png", class:"img-thumbnail") %>
+				<div class="field">
+					<%= f.attachment_field :university_image, :class =>"my-3" %>
+				</div>
 			</div>
-		</div>
-		<div class="col-lg-7">
-			<div class="field">
-				<%= f.text_field :name %>
+			<div class="col-lg-6">
+				<div class="field">
+					<span>大学名：　</span>
+					<%= f.text_field :name, :class =>"form-control my-3" %>
+				</div>
+				<div class="field">
+					<span>住所：　</span>
+					<%= f.text_field :location, :class =>"form-control my-3" %>
+				</div>
+				<div class="uni-up-action">
+					<%= f.submit '更新', :class=>"btn btn-lg btn-danger my-3 float-right", data: { confirm: "「#{@university.name}」を更新します"} %>
+				</div>
 			</div>
-			<div class="field">
-				<%= f.text_field :location %>
-			</div>
-			<div class="action">
-				<%= f.submit '更新', :class=>"btn btn-lg" %>
-			</div>
+			<div class-="col-lg-1"></div>
 		</div>
 		<% end %>
-	</div>
+
 	<!-- 地図 -->
-	<div class="row">
 		<div id=map></div>
 		<script type="text/javascript">
 		  function initMap() {
@@ -64,5 +70,4 @@
 		<script async defer
 		  src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyAWKdtZHy3XPl9RzmpRzPO3Jhql_tWeIU4&callback=initMap">
 		</script>
-	</div>
 </div>

@@ -1,7 +1,14 @@
 class Admin::LecturesController < ApplicationController
 
+	before_action :login_required
+
+    def login_required
+        redirect_to new_admin_session_path unless current_admin
+    end
+
 	def index
-		@lectures = Lecture.all
+		@q = Lecture.ransack(params[:q])
+		@lectures = @q.result(distict: true).page(params[:page]).per(15)
 	end
 
 	def new
