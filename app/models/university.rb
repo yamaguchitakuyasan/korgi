@@ -3,6 +3,8 @@ class University < ApplicationRecord
 	has_many :lectures, dependent: :destroy
 	has_many :professors, dependent: :destroy
 
+	validates :name, :location, presence: true
+
 	attachment :university_image
 
 	geocoded_by :location

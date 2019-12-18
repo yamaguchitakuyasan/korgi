@@ -5,14 +5,18 @@ class Admin::UniversitiesController < ApplicationController
     end
 
 	def index
-		@universities = University.all
+		@universities = University.all.page(params[:page]).per(10)
 		@university = University.new
 	end
 
 	def create
 		university = University.new(university_params)
-		university.save
-		redirect_to admin_universities_path
+		if  university.save
+			redirect_to admin_universities_path
+		else	@universities = University.all.page(params[:page]).per(10)
+			@university = University.new
+			render :index
+		end
 	end
 
 	def edit

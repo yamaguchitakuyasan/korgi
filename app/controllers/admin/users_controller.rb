@@ -5,6 +5,8 @@ class Admin::UsersController < ApplicationController
     end
 
 	def index
+		@q = User.ransack(params[:q])
+		@users = @q.result(distict: true).page(params[:page]).per(20)
 	end
 
 	def show

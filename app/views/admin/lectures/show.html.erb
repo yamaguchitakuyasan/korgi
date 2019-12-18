@@ -4,22 +4,19 @@
 		<div class="col-lg-1">
 		</div>
 
-		<div class="col-lg-8">
-			<div class="row top">
-				<div class="col-lg-5">
+		<div class="col-lg-8 my-3">
+			<div class="row">
+				<div class="col-lg-8">
 					<h4><%= @lecture.name %></h4>
-					<h6><%= @lecture.held_at.strftime("%Y-%m-%d %H:%M") %></h6>
+					<h6>主催: <%= @university.name %></h6>
+					<h6>開催日時: <%= @lecture.held_at.strftime("%Y年%m月%d日 %H:%M") %>-</h6>
+					<h6>所要時間: <%= @lecture.required_time %>分</h6>
 				</div>
 				<div class="col-lg-4">
-					<% if @lecture.active_flag == true %>
-						<h6>受講可</h6>
-					<% else %>
-						<h6>受講不可</h6>
-					<% end %>
-				</div>
-				<div class="col-lg-3">
-					<%= link_to("編集", edit_admin_lecture_path(@lecture.id), {class: "btn btn-lg"}) %>
-					<%= link_to("編集", edit_admin_lecture_path(@lecture.id), {class: "btn btn-lg"}) %>
+					<div class="btn float-right">
+						<%= link_to("編集", edit_admin_lecture_path(@lecture.id), {class: "btn btn-md btn-danger"}) %>
+						<%= link_to("戻る", admin_lectures_path, {class: "btn btn-md btn-secondary"}) %>
+					</div>
 				</div>
 
 			</div>
@@ -34,36 +31,30 @@
 					<h6><%= @lecture.top_message %></h6>
 					<p><%= @lecture.description %></p>
 					<% @lecture.tag_list.each do |tag| %>
-					<span>#<%= tag %></span>
+					<span>テーマ:  #<%= tag %> </span><br>
+					<span class="float-right">開催場所: <%= @university.location %></span>
 					<% end %>
 				</div>
 
 			</div>
 
-			<div class="row lecture_location">
-				<div class="col-lg-10">
-					<span><%= @university.location %></span>
-				</div>
-			</div>
-
 			<div class="row reservation_user">
-				<div class="col-lg-5">
-					<h4>予約中のユーザ</h4>
-				</div>
-				<div class="col"></div>
-				<div class="col-lg-10">
-					<table class="table table-hover table-inverse">
-						<tbody>
-							<% @reservations.each do |reservation| %>
-								<tr>
-									<td></td>
-									<td><%= reservation.user.name %></td>
-									<td><%= reservation.created_at.strftime("%y年%m月%d日") %></td>
-								</tr>
-							<% end %>
-						</tbody>
-					</table>
-				</div>
+				<div class="col-lg-2"></div>
+					<div class="col-lg-8 my-3">
+						<h4>予約中のユーザ</h4>
+						<table class="table table-hover table-inverse">
+							<tbody>
+								<% @reservations.each do |reservation| %>
+									<tr>
+										<td></td>
+										<td><%= reservation.user.name %></td>
+										<td><%= reservation.created_at.strftime("%y年%m月%d日") %></td>
+									</tr>
+								<% end %>
+							</tbody>
+						</table>
+					</div>
+				<div class="col-lg-2"></div>
 			</div>
 		</div>
 </div>
