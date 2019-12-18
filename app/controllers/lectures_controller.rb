@@ -1,13 +1,16 @@
 class LecturesController < ApplicationController
 
 	def index
-		@lectures = Lecture.all
+		@q = Lecture.ransack(params[:q])
+		@lectures =	@q.result(distict: true).page(params[:page]).per(10)
 	end
 
 	def show
 		@lecture = Lecture.find(params[:id])
 		@university = @lecture.university
+	if user_signed_in?
 		@payment_created_at = Payment.where(user_id: current_user.id).maximum(:created_at)
+	end
 	end
 
 	def current_location

@@ -1,8 +1,9 @@
-<div class="container">
-
-	<div class="row">
+<div class="row">
+	<%= render partial: "admin/admin_header" %>
 		<!-- 大学登録 -->
-		<div class="col-lg-7">
+		<div class="col-lg-1">
+		</div>
+		<div class="col-lg-8">
 			<%= form_for(@university, url: admin_universities_path) do |f| %>
 				<div class="field">
 					<label for="university_name"></label>
@@ -10,7 +11,7 @@
 				</div>
 
 				<div class="field">
-		 			<label for="university_image">
+		 			<label for="university_image"></label>
 		 				<%= f.attachment_field :university_image %>
 		 		</div>
 
@@ -23,14 +24,7 @@
 					<%= f.submit '登録', :class=>"btn btn-lg" %>
 				</div>
 			<% end %>
-		</div>
-		<!-- 大学検索 -->
-		<div class="col-lg-5">
-		</div>
-	</div>
     <!-- 大学一覧 -->
-	<div class="row">
-		<div class="col-lg-8">
 			<table class="table table-hover table-inverse">
 				<thead>
 					<tr class="table-avtive">
@@ -51,5 +45,4 @@
 				</tbody>
 			</table>
 		</div>
-	</div>
 </div>

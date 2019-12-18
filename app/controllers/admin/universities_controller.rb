@@ -1,4 +1,9 @@
 class Admin::UniversitiesController < ApplicationController
+
+	def login_required
+        redirect_to new_admin_session_path unless current_admin
+    end
+
 	def index
 		@universities = University.all
 		@university = University.new
