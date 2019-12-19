@@ -91,18 +91,22 @@
 					<div class="registration-box mt-3 text-center">
 						<% if current_user %>
 								<% if @lecture.held_at > Time.current %>
-									<% if @payment_created_at > Date.today.ago(30.days) %>
-											<% if @lecture.reserved_by?(current_user) %>
-											<%= link_to lecture_reservations_path(@lecture), method: :delete, data: { confirm: "この講義の予約を取り消します"} do %>
-											<span class="btn btn-md btn-danger mx-auto d-block">予約を解除</span>
-											<% end %>
-											<% else %>
-											<%= link_to lecture_reservations_path(@lecture),method: :post, data: { confirm: "この講義を予約します"} do %>
-											<span class="btn btn-md btn-danger mx-auto d-block">予約する</span>
-											<% end %>
-											<% end %>
+									<% if @payment.present? %>
+										<% if @payment_created_at > Date.today.ago(30.days) %>
+												<% if @lecture.reserved_by?(current_user) %>
+												<%= link_to lecture_reservations_path(@lecture), method: :delete, data: { confirm: "この講義の予約を取り消します"} do %>
+												<span class="btn btn-md btn-danger mx-auto d-block">予約を解除</span>
+												<% end %>
+												<% else %>
+												<%= link_to lecture_reservations_path(@lecture),method: :post, data: { confirm: "この講義を予約します"} do %>
+												<span class="btn btn-md btn-danger mx-auto d-block">予約する</span>
+												<% end %>
+												<% end %>
+										<% else %>
+										<%= link_to "有料登録する", user_path(current_user) %>
+										<% end %>
 									<% else %>
-									<%= link_to "有料登録する", user_path(current_user) %>
+									<%= link_to "有料登録する", user_path(current_user), class:"btn btn-md btn-danger" %>
 									<% end %>
 								<% else %>
 								<h6 class="text-center">予約期間外です</h6>

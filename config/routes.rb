@@ -25,8 +25,6 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
 
-  get 'home/about'
-
   get 'users/:id/mykorgi' => 'users#mykorgi', as: "mykorgi"
 
   resources :card, only: [:new, :show] do

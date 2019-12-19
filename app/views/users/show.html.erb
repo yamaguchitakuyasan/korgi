@@ -1,35 +1,47 @@
 <%= render 'users/user_header' %>
 
 <div class="container">
-	<div class="row">
+	<div class="row my-3">
 		<!-- プロフィール -->
 		<div class="col-lg-6">
-			<div class="profile-header text-center">
-				<h4>プロフィール</h4>
+				<h4 class="text-center">プロフィール</h4>
 
-				<%= attachment_image_tag(@user, :profile_image, :fill, 180, 180, fallback: "no_image.png", class:"img-thumbnail rounded-circle") %>
-
-			</div>
-
-				<div class="user-name">ユーザ名
-					<span><%= @user.name %></span>
+				<div class="row image">
+				<%= attachment_image_tag(@user, :profile_image, :fill, 150, 150, fallback: "no_image.png", class:"img-thumbnail rounded-circle mx-auto d-block") %>
 				</div>
 
-				<div class="email">メールアドレス<span>
-					<%= @user.email %></span>
-				</div>
+				<div class="row">
+					<div class="col-lg-3"></div>
+					<div class="col-lg-6 text-center">
+						<div class="row mx-auto">
+					<div class="user-name mt-2 mb-1 mr-5">
+						<span>ユーザ名</span><br />
+						<span class="user-information border-bottom"><%= @user.name %></span>
+					</div>
 
-				<div class="former-university">出身大学
-					<span><%= @user.former_university %></span>
-				</div>
+					<div class="email mt-2 mb-1">
+						<span>メールアドレス</span><br />
+						<span class="user-information border-bottom"><%= @user.email %></span>
+					</div>
+						</div>
+						<div class="row mx-auto">
+					<div class="former-university mt-2 mb-1 mr-5">
+						<span>出身大学</span><br />
+						<span class="user-information border-bottom"><%= @user.former_university %></span>
+					</div>
 
-				<div class="major">専攻
-					<span><%= @user.major %></span>
-				</div>
+					<div class="major mt-2 mb-1">
+						<span>専攻</span><br />
+						<span class="user-information border-bottom"><%= @user.major %></span>
+					</div>
+					</div>
 
-				<% if @user.id == current_user.id %>
-					<%= link_to "アカウントを編集する", edit_user_path(@user) %>
-				<% end %>
+					<% if @user.id == current_user.id %>
+						<%= link_to "アカウントを編集する", edit_user_path(@user),:class=>"btn btn-md btn-danger my-3" %>
+					<% end %>
+					</div>
+				<div class="col-lg-3"></div>
+				</div>
 
 		</div>
 		<!-- クレジットカード -->
@@ -60,7 +72,7 @@
 						<% else %>
 							<div class="card-registration">
 								<span>現在、有効なカード情報が登録されていません。定期課金を開始するにはカード登録が必要です。</span>
-								<%= link_to("カードを登録する", new_card_path, {class: "btn btn-lg"}) %>
+								<%= link_to("カードを登録する", new_card_path, class: "btn btn-lg", data: {"turbolinks" => false}) %>
 							</div>
 						<% end %>
 					</div>
@@ -93,3 +105,4 @@
 		</div>
 	</div>
 </div>
+<%= render 'users/user_footer' %>
