@@ -7,7 +7,7 @@
 			<div class="profile-header text-center">
 				<h4>プロフィール</h4>
 
-				<%= attachment_image_tag(@user, :profile_image, size:'200x200', fallback: "no_image.png", class:"img-thumbnail rounded-circle") %>
+				<%= attachment_image_tag(@user, :profile_image, :fill, 180, 180, fallback: "no_image.png", class:"img-thumbnail rounded-circle") %>
 
 			</div>
 
