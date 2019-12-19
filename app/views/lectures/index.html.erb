@@ -54,7 +54,7 @@
 			<div class="card-columns" style="text-decoration:none; color:black;">
 				<% @lectures.each do |lecture| %>
 				<%= link_to lecture_path(lecture.id) do %>
-					<div class="card">
+					<div class="card border-secondary">
 						<%= attachment_image_tag(@lecture, :lecture_image,size:'300x300', fallback: "no_image.png", class:"img-thumbnail") %>
 						<div class="card-body" style="text-decoration:none; color:black;">
 							<% if lecture.created_at > Time.current - 1.hour %>

@@ -58,3 +58,11 @@
 .user-information {
   font-size: 20px;
 }
+.cursor {
+  cursor:  pointer;
+}
+.nav-item:hover {
+  -webkit-transform: translateY(-5px);
+  -ms-transform: translateY(-5px);
+  transform: translateY(-5px);
+}
