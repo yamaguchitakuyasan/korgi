@@ -2,19 +2,21 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-lg-3">
-			<p>検索</p>
+		<div class="col-lg-3 my-4">
+			<h5 class="mb-3">講義を探す</h5>
 			<div class="search-box">
 			</div>
 
 			<div class="currentLocation">
 				<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWKdtZHy3XPl9RzmpRzPO3Jhql_tWeIU4&callback=initMap"></script>
 
+				<span><img src="/assets/current_location.jpeg" style="width:30px">現在地から検索する</span><br>
 				<%= form_tag current_location_path, name: "user_location", method: :post do %>
 					<input type="hidden" id="lat" name="lat_number" value="">
 					<input type="hidden" id="lon" name="lon_number" value="">
-					<input type="button" id="location" value="現在地から検索する" onclick="getMyPlace()" >
+					<input type="button" id="location" value="講義を検索" onclick="getMyPlace()" >
 				<% end %>
+				<span>※時間がかかることがあります</span>
 
 				<script>
 					function getMyPlace() {
@@ -41,17 +43,20 @@
 			</div>
 		</div>
 
-		<div class="col-lg-9">
-			<h4>講義一覧</h4>
-			<div class="card-columns">
+		<div class="col-lg-9 my-5">
+			<div class="card-columns" style="text-decoration:none; color:black;">
 				<% @lectures.each do |lecture| %>
 				<%= link_to lecture_path(lecture.id) do %>
 					<div class="card">
-						<img class="card-img-top">
-						<div class="card-body">
-							<h4 class="card-title"><%= lecture.name %></h4>
-							<h6 class="card-subtitle">主催大学：<%= lecture.university.name %></h6>
-							<h6 class="card-text"><%= lecture.favorites.count %>件のお気に入り</h6>
+						<%= attachment_image_tag(@lecture, :lecture_image,size:'300x300', fallback: "no_image.png", class:"img-thumbnail") %>
+						<div class="card-body" style="text-decoration:none; color:black;">
+							<h4 class="card-title" style=" width:100%; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;"><%= lecture.name %></h4>
+							<span class="card-subtitle">主催：<%= lecture.university.name %></span>
+							<div class="time-information">
+							<span class="card-text ">日時: <%= lecture.held_at.strftime("%Y年%m月%d日 %H:%M") %>〜</span>
+							<span class="card-text">所要時間: <%= lecture.required_time %>分</span>
+						    </div>
+							<span class="card-text float-right mb-2"><%= lecture.favorites.count %>件のお気に入り</span>
 						</div>
 					</div>
 				<% end %>

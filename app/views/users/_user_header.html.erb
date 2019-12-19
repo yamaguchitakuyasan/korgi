@@ -1,8 +1,10 @@
 <div class="row">
 	<!-- logo -->
 	<div class="col text-center">
-		<img src="/assets/logodata_01.png" style="width:60px;">
-		<h5 style="font-size:25px; font-family:AvenirLTStd-Medium;">korgi</h5>
+    <%= link_to root_path, target: "_blank" do %>
+	  <img src="/assets/logodata_01.png" style="width:60px;">
+    <% end %>
+    <h5 style="font-size:25px; font-family:AvenirLTStd-Medium;">korgi</h5>
 	</div>
 </div>
 
@@ -10,7 +12,14 @@
   <div class="collapse navbar-collapse" id="navbar-user">
     <div class="navbar-nav ml-auto mr-auto" style="font-size:16px; font-family:AvenirLTStd-Medium; letter-spacing:1px;">
       <span class="nav-item nav-link active"><%= link_to 'HOME', root_path, style: "color:black;text-decoration:none;" %></span>
-      <span class="nav-item nav-link active">WHAT'S korgi?</span>
+      <span id="js-show-popup" class="nav-item nav-link active">WHAT'S korgi?</span>
+      <div class="popup" id="js-popup">
+        <div class="popup-inner">
+          <div class="close-btn" id="js-close-btn"><i class="fas fa-times"></i></div>
+          <span>What's korgi?</span>
+        </div>
+      <div class="black-background" id="js-black-bg"></div>
+      </div>
       <span class="nav-item nav-link active"><%= link_to "FIND LECTURE", lectures_path, style: "color:black;text-decoration:none" %></span>
       	<% if user_signed_in? %>
 		    <span class="nav-item nav-link active"><%= link_to "MY korgi", mykorgi_path(current_user.id), style: "color:black;text-decoration:none" %></span>
@@ -23,15 +32,6 @@
     </div>
   </div>
 </nav>
-
-<div class="popup" id="js-popup">
-  <div class="popup-inner">
-    <div class="close-btn" id="js-close-btn"><i class="fas fa-times"></i></div>
-    <span>What's korgi?</span>
-  </div>
-  <div class="black-background" id="js-black-bg"></div>
-</div>
-<button id="js-show-popup">Show Popup</button>
 
 <script>
 function popupImage() {
