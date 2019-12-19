@@ -1,21 +1,40 @@
-<div class="container">
-	<!-- korgi　logo -->
-	<div class="row">
-		<div class="col-lg-4">
-			hello
-		</div>
-	</div>
+<div class="row">
+	<%= render partial: "admin/admin_header" %>
 
-	<div class="row">
-		<!-- サイドバー -->
-		<div class="col-lg-4">
-			hello
+		<div class="col-lg-1">
 		</div>
 
-		<!-- user index -->
 		<div class="col-lg-8">
-			hello
-		</div>
+			<div class="row">
+				<h3 class="mt-3">登録ユーザ</h3>
+					<div class="col">
+					<%= search_form_for(@q, url: admin_users_path, :class =>"float-right mt-5") do |f| %>
+	      			<%= f.search_field :name_cont %>
+	      			<%= f.submit "検索", class:"btn btn-danger btn-sm" %>
+	      			<% end %>
+      			</div>
+			</div>
 
-	</div>
+			<div class="row">
+				<table class="mt-3 table table-hover table-inverse table-bordered">
+					<thead>
+						<tr class="table-active">
+							<th>ユーザ名</th>
+							<th>出身大学</th>
+							<th>専攻</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% @users.each do |user| %>
+							<tr>
+								<td><%= user.name %></td>
+								<td><%= user.former_university %></td>
+								<td><%= user.major %></td>
+							</tr>
+						<% end %>
+					</tbody>
+				</table>
+				<%= paginate @users, :class=>"pagination" %>
+			</div>
+		</div>
 </div>

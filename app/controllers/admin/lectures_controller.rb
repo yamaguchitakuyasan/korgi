@@ -8,7 +8,7 @@ class Admin::LecturesController < ApplicationController
 
 	def index
 		@q = Lecture.ransack(params[:q])
-		@lectures = @q.result(distict: true).page(params[:page]).per(15)
+		@lectures = @q.result(distict: true).page(params[:page]).per(20)
 	end
 
 	def new
@@ -16,9 +16,13 @@ class Admin::LecturesController < ApplicationController
 	end
 
 	def create
-		lecture = Lecture.new(lecture_params)
-		lecture.save
-		redirect_to admin_lectures_path
+		@lecture = Lecture.new(lecture_params)
+
+		if	@lecture.save
+			redirect_to admin_lectures_path
+		else
+			render :new
+		end
 	end
 
 	def show
@@ -33,8 +37,12 @@ class Admin::LecturesController < ApplicationController
 
 	def update
 		lecture = Lecture.find(params[:id])
-		lecture.update(lecture_params)
-		redirect_to admin_lecture_path(lecture.id)
+		if lecture.update(lecture_params)
+		   redirect_to admin_lecture_path(lecture.id)
+		else
+		   @lecture = Lecture.find(params[:id])
+		   render :edit
+		end
 	end
 
 	def destroy
@@ -42,7 +50,7 @@ class Admin::LecturesController < ApplicationController
 
 	private
 	def lecture_params
-		params.require(:lecture).permit(:name, :lecture_image, :top_message, :description, :held_at, :university_id, :tag_list)
+		params.require(:lecture).permit(:name, :lecture_image, :top_message, :description, :held_at, :university_id, :tag_list, :required_time)
 	end
 
 end
