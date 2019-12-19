@@ -3,43 +3,42 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-3 my-4">
-			<h5 class="mb-3">講義を探す</h5>
-			<div class="search-box">
-			</div>
+			<div class="search-box" style="position: fixed;">
+				<h5 class="mb-3">講義を探す</h5>
+				<div class="currentLocation">
+					<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWKdtZHy3XPl9RzmpRzPO3Jhql_tWeIU4&callback=initMap"></script>
 
-			<div class="currentLocation">
-				<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWKdtZHy3XPl9RzmpRzPO3Jhql_tWeIU4&callback=initMap"></script>
+					<span><img src="/assets/current_location.jpeg" style="width:30px">現在地から検索する</span><br>
+					<%= form_tag current_location_path, name: "user_location", method: :post do %>
+						<input type="hidden" id="lat" name="lat_number" value="">
+						<input type="hidden" id="lon" name="lon_number" value="">
+						<input type="button" id="location" value="講義を検索" onclick="getMyPlace()" >
+					<% end %>
+					<span>※時間がかかることがあります</span>
 
-				<span><img src="/assets/current_location.jpeg" style="width:30px">現在地から検索する</span><br>
-				<%= form_tag current_location_path, name: "user_location", method: :post do %>
-					<input type="hidden" id="lat" name="lat_number" value="">
-					<input type="hidden" id="lon" name="lon_number" value="">
-					<input type="button" id="location" value="講義を検索" onclick="getMyPlace()" >
-				<% end %>
-				<span>※時間がかかることがあります</span>
+					<script>
+						function getMyPlace() {
+						  // var output = document.getElementById("result");
+						  if (!navigator.geolocation){
+						    output.innerHTML = "<p>Geolocationはあなたのブラウザーでサポートされておりません</p>";
+						    return;
+						  }
+						  function success(position) {
+						    var latitude  = position.coords.latitude;
+						    var longitude = position.coords.longitude;
+						    // output.innerHTML = '<p>緯度 ' + latitude + '° <br>経度 ' + longitude + '°</p>';
+						    document.getElementById( "lat" ).value = latitude ;
+						    document.getElementById( "lon" ).value = longitude ;
+						    document.user_location.submit();
+						  };
+						  function error() {
+						    output.innerHTML = "座標位置を取得できません";
+						  };
+						  navigator.geolocation.getCurrentPosition(success, error);
+						}
+					</script>
 
-				<script>
-					function getMyPlace() {
-					  // var output = document.getElementById("result");
-					  if (!navigator.geolocation){
-					    output.innerHTML = "<p>Geolocationはあなたのブラウザーでサポートされておりません</p>";
-					    return;
-					  }
-					  function success(position) {
-					    var latitude  = position.coords.latitude;
-					    var longitude = position.coords.longitude;
-					    // output.innerHTML = '<p>緯度 ' + latitude + '° <br>経度 ' + longitude + '°</p>';
-					    document.getElementById( "lat" ).value = latitude ;
-					    document.getElementById( "lon" ).value = longitude ;
-					    document.user_location.submit();
-					  };
-					  function error() {
-					    output.innerHTML = "座標位置を取得できません";
-					  };
-					  navigator.geolocation.getCurrentPosition(success, error);
-					}
-				</script>
-
+				</div>
 			</div>
 		</div>
 
