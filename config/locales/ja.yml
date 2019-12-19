@@ -1,4 +1,12 @@
 ja:
+  activerecord:
+    models:
+      user:
+    attributes:
+      user:
+        name: 名前
+        email: メールアドレス
+        password: パスワード
   views:
     pagination:
       first: "&laquo; 最初"
@@ -6,3 +14,6 @@ ja:
       previous: "&lsaquo; 前"
       next: "次 &rsaquo;"
       truncate: "..."
+  devise:
+    failure:
+      invalid: "入力内容を確認してください"

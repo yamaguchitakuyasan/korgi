@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_one :payment, dependent: :destroy
   has_one :card, dependent: :destroy
 
+  validates :name, presence: true
+
   attachment :profile_image
 
 end
