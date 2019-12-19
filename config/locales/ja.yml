@@ -17,3 +17,6 @@ ja:
   devise:
     failure:
       invalid: "入力内容を確認してください"
+    sessions:
+      user:
+        signed_out: ""

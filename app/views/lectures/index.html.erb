@@ -5,6 +5,14 @@
 		<div class="col-lg-3 my-4">
 			<div class="search-box" style="position: fixed;">
 				<h5 class="mb-3">講義を探す</h5>
+
+				<div class="phrase-search">
+					<%= search_form_for(@q, url:lectures_path) do |f| %>
+						<%= f.search_field :name_or_university_name_cont, :placeholder => "フリーワード", class:"serch-form" %>
+						<%= f.submit "検索", class:"btn btn-sm btn-danger" %>
+					<% end %>
+				</div>
+
 				<div class="currentLocation">
 					<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWKdtZHy3XPl9RzmpRzPO3Jhql_tWeIU4&callback=initMap"></script>
 
@@ -49,18 +57,29 @@
 					<div class="card">
 						<%= attachment_image_tag(@lecture, :lecture_image,size:'300x300', fallback: "no_image.png", class:"img-thumbnail") %>
 						<div class="card-body" style="text-decoration:none; color:black;">
-							<h4 class="card-title" style=" width:100%; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;"><%= lecture.name %></h4>
-							<span class="card-subtitle">主催：<%= lecture.university.name %></span>
-							<div class="time-information">
-							<span class="card-text ">日時: <%= lecture.held_at.strftime("%Y年%m月%d日 %H:%M") %>〜</span>
-							<span class="card-text">所要時間: <%= lecture.required_time %>分</span>
-						    </div>
-							<span class="card-text float-right mb-2"><%= lecture.favorites.count %>件のお気に入り</span>
+							<% if lecture.created_at > Time.current - 1.hour %>
+								<span style="color:red;">すぐ受けられます！</span>
+							<% else %>
+								<span style="color:white;">空白</span>
+							<% end %>
+								<h4 class="card-title" style=" width:100%; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;"><%= lecture.name %></h4>
+								<span class="card-subtitle">主催：<%= lecture.university.name %></span>
+								<div class="time-information">
+								<span class="card-text ">日時: <%= lecture.held_at.strftime("%Y年%m月%d日 %H:%M") %>〜</span>
+								<span class="card-text">所要時間: <%= lecture.required_time %>分</span>
+							    </div>
+								<span class="card-text float-right mb-2"><%= lecture.favorites.count %>件のお気に入り</span>
 						</div>
 					</div>
 				<% end %>
 				<% end %>
 			</div>
+		</div>
+
+		 <div class="pgaginate mx-auto" style="font-size:20px;">
+		<% if @location == false %>
+			<%= paginate @lectures %>
+		<% end %>
 		</div>
 	</div>
 </div>

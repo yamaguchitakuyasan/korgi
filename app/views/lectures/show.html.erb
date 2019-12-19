@@ -35,7 +35,7 @@
 				<div class="col"></div>
 				<div class="col-lg-3">
 					<% if current_user %>
-						<% if @lecture.held_at > Time.current %>
+						<% if @lecture.held_at > Time.current - 1.hour %>
 							<% if @lecture.favorited_by?(current_user) %>
 								<%= link_to lecture_favorites_path(@lecture), method: :delete, data: { confirm: "お気に入りを解除します"} do %>
 								<span class="btn btn-sm btn-dark float-right my-2">お気に入りを解除する<i class="fa fa-heart" aria-hidden="true" style="color: red;"></i></span>
@@ -90,20 +90,20 @@
 				<div class="col-lg-4">
 					<div class="registration-box mt-3 text-center">
 						<% if current_user %>
-								<% if @lecture.held_at > Time.current %>
+								<% if @lecture.held_at > Time.current - 1.hour %>
 									<% if @payment.present? %>
 										<% if @payment_created_at > Date.today.ago(30.days) %>
 												<% if @lecture.reserved_by?(current_user) %>
-												<%= link_to lecture_reservations_path(@lecture), method: :delete, data: { confirm: "この講義の予約を取り消します"} do %>
-												<span class="btn btn-md btn-danger mx-auto d-block">予約を解除</span>
+													<%= link_to lecture_reservations_path(@lecture), method: :delete, data: { confirm: "この講義の予約を取り消します"} do %>
+													<span class="btn btn-md btn-danger mx-auto d-block">予約を解除</span>
 												<% end %>
 												<% else %>
-												<%= link_to lecture_reservations_path(@lecture),method: :post, data: { confirm: "この講義を予約します"} do %>
-												<span class="btn btn-md btn-danger mx-auto d-block">予約する</span>
+													<%= link_to lecture_reservations_path(@lecture),method: :post, data: { confirm: "この講義を予約します"} do %>
+													<span class="btn btn-md btn-danger mx-auto d-block">予約する</span>
 												<% end %>
 												<% end %>
 										<% else %>
-										<%= link_to "有料登録する", user_path(current_user) %>
+										<%= link_to "有料登録する", user_path(current_user), class:"btn btn-md btn-danger" %>
 										<% end %>
 									<% else %>
 									<%= link_to "有料登録する", user_path(current_user), class:"btn btn-md btn-danger" %>
