@@ -6,9 +6,9 @@
         <% if admin_signed_in? %>
         <ul class="admin-header-tab" style="list-style:none; text-decoration:none;">
             <br>
-            <li><%= link_to "HOME", admin_lectures_path, :style=>"color:black;" %></li>
+            <li><%= link_to("HOME", admin_lectures_path, :style=>"color:black;", data: {"turbolinks" => false}) %></li>
             <li><%= link_to "講義を登録する", new_admin_lecture_path, :style=>"color:black;" %></li>
-            <li><%= link_to "大学を登録する", admin_universities_path, :style=>"color:black;" %></li>
+            <li><%= link_to("大学を登録する", admin_universities_path, :style=>"color:black;", data: {"turbolinks" => false}) %></li>
             <li><%= link_to "ユーザ管理", admin_users_path, :style=>"color:black;" %></li>
             <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, data: { confirm: "ログアウトしますか"}, style: "color:black;text-decoration:none"%></li>
         </ul>

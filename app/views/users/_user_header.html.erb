@@ -13,13 +13,26 @@
     <div class="navbar-nav ml-auto mr-auto" style="font-size:15px; font-family:AvenirLTStd-Medium; letter-spacing:0.5px;">
       <span class="nav-item nav-link active"><%= link_to 'HOME', root_path, style: "color:black;text-decoration:none;" %></span>
       <span id="js-show-popup" class="nav-item nav-link active cursor">WHAT'S korgi</span>
-      <div class="popup" id="js-popup">
-        <div class="popup-inner">
-          <div class="close-btn" id="js-close-btn"><i class="fas fa-times"></i></div>
-          <span>What's korgi?</span>
+
+        <div class="popup" id="js-popup">
+          <div class="popup-inner">
+            <div class="close-btn" id="js-close-btn"><i class="fas fa-times"></i></div>
+            <div class="top-message">
+              <h3 class="title">What's korgi<i class="fas fa-question-circle"></i></h3>
+              <span style="font-size:20px;">〜自分を育てる、社会人の教育〜</span><br><br>
+              <p>スキルが必要だと感じたら,</p>
+              <p>知識が必要だと感じたら,</p>
+              <p>待ち合わせまで時間があったら,</p>
+              <p>映画を観に行くように、好きな講義、近くの講義を</p>
+              <p>聴きに行けます。</p>
+              <p>STEP①</p>
+              <p>STEP②</p>
+              <p>STEP③</p>
+            </div>
+          </div>
+        <div class="black-background" id="js-black-bg"></div>
         </div>
-      <div class="black-background" id="js-black-bg"></div>
-      </div>
+
       <span class="nav-item nav-link active"><%= link_to "FIND LECTURE", lectures_path, style: "color:black;text-decoration:none" %></span>
 
         <% if user_signed_in? %>
