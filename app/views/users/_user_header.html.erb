@@ -4,15 +4,15 @@
     <%= link_to root_path, target: "_blank" do %>
 	  <img src="/assets/logodata_01.png" style="width:60px;">
     <% end %>
-    <h5 style="font-size:25px; font-family:AvenirLTStd-Medium;">korgi</h5>
+    <h5 style="font-size:25px; font-family:AvenirLTStd-Medium;font-style:italic;">korgi</h5>
 	</div>
 </div>
 
 <nav class="navbar sticky-top navbar-expand-lg border-top border-bottom" style="background-color: white; height: 70px;">
   <div class="collapse navbar-collapse" id="navbar-user">
-    <div class="navbar-nav ml-auto mr-auto" style="font-size:15px; font-family:AvenirLTStd-Medium; letter-spacing:0.5px;">
-      <span class="nav-item nav-link active"><%= link_to 'HOME', root_path, style: "color:black;text-decoration:none;" %></span>
-      <span id="js-show-popup" class="nav-item nav-link active cursor">WHAT'S korgi</span>
+    <div class="navbar-nav ml-auto mr-auto" style="font-size:15px; font-family:AvenirLTStd-Medium;font-style:italic; letter-spacing:0.5px;">
+      <span class="nav-item nav-link active mr-2"><%= link_to 'HOME', root_path, style: "color:black;text-decoration:none;" %></span>
+      <span id="js-show-popup" class="nav-item nav-link active cursor mr-2">WHAT'S korgi</span>
 
         <div class="popup" id="js-popup">
           <div class="popup-inner">
@@ -36,18 +36,18 @@
         <div class="black-background" id="js-black-bg"></div>
         </div>
 
-      <span class="nav-item nav-link active"><%= link_to "FIND LECTURE", lectures_path, style: "color:black;text-decoration:none" %></span>
+      <span class="nav-item nav-link active mr-2"><%= link_to "FIND LECTURE", lectures_path, style: "color:black;text-decoration:none" %></span>
 
-        <% if user_signed_in? %>
-		    <span class="nav-item nav-link active"><%= link_to "MY korgi", mykorgi_path(current_user.id), style: "color:black;text-decoration:none" %></span>
-        <span class="nav-item nav-link active"><%= link_to "ACCOUNT SETTING", user_path(current_user), style: "color:black;text-decoration:none" %></span>
-		    <span class="nav-item nav-link active"><%= link_to "LOG OUT",destroy_user_session_path, method: :delete, style: "color:black;text-decoration:none" %></span>
+      <% if user_signed_in? %>
+		    <span class="nav-item nav-link active mr-2"><%= link_to "MY korgi", mykorgi_path(current_user.id), style: "color:black;text-decoration:none" %></span>
+        <span class="nav-item nav-link active mr-2"><%= link_to "ACCOUNT SETTING", user_path(current_user), style: "color:black;text-decoration:none" %></span>
+		    <span class="nav-item nav-link active mr-2"><%= link_to "LOG OUT",destroy_user_session_path, method: :delete, style: "color:black;text-decoration:none" %></span>
 	    <% else %>
-	    	<span class="nav-item nav-link active"><%= link_to "SIGN UP",new_user_registration_path,style: "color:black;text-decoration:none" %></span>
-	    	<span class="nav-item nav-link active"><%= link_to "SIGN IN",new_user_session_path,style: "color:black;text-decoration:none" %></span>
-      	<% end %>
+	    	<span class="nav-item nav-link active mr-2"><%= link_to "SIGN UP",new_user_registration_path,style: "color:black;text-decoration:none" %></span>
+	    	<span class="nav-item nav-link active mr-2"><%= link_to "SIGN IN",new_user_session_path,style: "color:black;text-decoration:none" %></span>
+      <% end %>
 
-      <span class="nav-item nav-link active">CONTACT(comming soon)</span>
+      <span class="nav-item nav-link active mr-2">CONTACT(comming soon)</span>
     </div>
   </div>
 </nav>

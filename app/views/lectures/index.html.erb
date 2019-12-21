@@ -9,11 +9,11 @@
 				<div class="phrase-search">
 					<%= search_form_for(@q, url:lectures_path) do |f| %>
 						<%= f.search_field :name_or_university_name_cont, :placeholder => "フリーワード", class:"serch-form" %>
-						<%= f.submit "検索", class:"btn btn-sm btn-danger" %>
+						<%= f.submit "検索", class:"btn btn-sm btn-danger mb-1" %>
 					<% end %>
 				</div>
 
-				<div class="currentLocation">
+				<div class="currentLocation my-3">
 					<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWKdtZHy3XPl9RzmpRzPO3Jhql_tWeIU4&callback=initMap"></script>
 
 					<span><img src="/assets/current_location.jpeg" style="width:30px">現在地から検索する</span><br>
@@ -55,9 +55,9 @@
 				<% @lectures.each do |lecture| %>
 				<%= link_to lecture_path(lecture.id) do %>
 					<div class="card border-secondary">
-						<%= attachment_image_tag(@lecture, :lecture_image, :fill, 300, 300, fallback: "no_image.png", class:"img-thumbnail") %>
+							<%= attachment_image_tag(lecture, :lecture_image, :fill, 300, 225, fallback: "no_image.png", class:"img-thumbnail") %>
 						<div class="card-body" style="text-decoration:none; color:black;">
-							<% if lecture.held_at > Time.current - 1.hour %>
+							<% if lecture.held_at < Time.current + 1.hour && lecture.held_at > Time.current %>
 								<span style="color:red;">すぐ受けられます！</span>
 							<% else %>
 								<span style="color:white;">空白</span>
