@@ -1,4 +1,25 @@
 ja:
+  activerecord:
+    models:
+      user:
+      lecture:
+      university:
+      university/lectures:
+    attributes:
+      user:
+        name: 名前
+        email: メールアドレス
+        password: パスワード
+      lecture:
+        name: 講義名
+        description: 講義の説明
+        held_at: 開催日時
+        top_message: トップメッセージ
+        required_time: 所要時間
+      university:
+        name: 大学名
+      university/lectures:
+        name: 大学名
   views:
     pagination:
       first: "&laquo; 最初"
@@ -6,3 +27,11 @@ ja:
       previous: "&lsaquo; 前"
       next: "次 &rsaquo;"
       truncate: "..."
+  devise:
+    failure:
+      invalid: "入力内容を確認してください"
+    sessions:
+      user:
+        signed_out: ""
+      admin:
+        signed_out: ""

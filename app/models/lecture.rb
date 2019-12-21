@@ -5,7 +5,7 @@ class Lecture < ApplicationRecord
 
 	belongs_to :university
 
-	validates :name, :top_message, :description, :held_at, :university_id, :required_time, presence: true
+	validates :name, :top_message, :description, :held_at, :required_time, presence: true
 	validates :description,
 		length: {maximum: 250}
 	validates :top_message,

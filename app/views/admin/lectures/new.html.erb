@@ -30,6 +30,7 @@
 
 		 			<div class="form-filed">
 		 				<label for="lecture_image"></label>
+		 					<span>講義イメージ :</span><br />
 		 					<%= f.attachment_field :lecture_image %>
 		 			</div>
 
@@ -61,8 +62,9 @@
 		 					<%= f.collection_select :university_id, University.all,:id, :name, :prompt => "選択してください" %>
 		 			</div>
 
-		 			<div class="form-group">
+		 			<div class="form-group"><br />
 		 				<label for="tag_list"></label>
+		 					<span>タグ :</span><br />
 		 					<%= f.text_field :tag_list, value: @lecture.tag_list.join(','), :class =>"form-control", :placeholder => "example:経営,起業" %>
 		 			</div>
 

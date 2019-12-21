@@ -6,26 +6,30 @@
     <div class="col-lg-6 my-5">
         <h2>korgi 管理者ログイン</h2>
 
+        <%- flash.each do |name, msg| -%>
+          <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
+        <%- end -%>
+
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="field my-3">
-          <%= f.label :email %><br />
+          <%= f.label :メールアドレス %><br />
           <%= f.email_field :email, :class =>"form-control", autofocus: true, autocomplete: "email" %>
         </div>
 
         <div class="field my-3">
-          <%= f.label :password %><br />
+          <%= f.label :パスワード %><br />
           <%= f.password_field :password, :class =>"form-control", autocomplete: "current-password" %>
         </div>
 
         <% if devise_mapping.rememberable? %>
           <div class="field">
             <%= f.check_box :remember_me %>
-            <%= f.label :remember_me %>
+            <%= f.label :ログインを維持する %>
           </div>
         <% end %>
 
         <div class="actions float-right">
-          <%= f.submit "ログイン" %>
+          <%= f.submit "ログイン",:class=>"btn btn-md btn-danger" %>
         </div>
       <% end %>
     </div>

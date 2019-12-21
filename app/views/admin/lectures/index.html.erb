@@ -9,8 +9,8 @@
 				<h3 class="mt-3">登録講義</h3>
 					<div class="col">
 					<%= search_form_for(@q, url: admin_lectures_path, :class =>"float-right mt-5") do |f| %>
-	      			<%= f.search_field :name_cont %>
-	      			<%= f.submit "検索", class:"btn btn-danger btn-sm" %>
+	      			<%= f.search_field :name_or_university_name_cont %>
+	      			<%= f.submit "検索", :placeholder => "フリーワード", class:"btn btn-danger btn-sm" %>
 	      			<% end %>
       			</div>
 			</div>
@@ -34,7 +34,9 @@
 						<% end %>
 					</tbody>
 				</table>
-				<%= paginate @lectures, :class=>"pagination" %>
+				<div data-turbolinks="false">
+					<%= paginate @lectures, :class=>"pagination" %>
+				</div>
 			</div>
 		</div>
 </div>

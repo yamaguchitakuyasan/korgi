@@ -1,49 +1,72 @@
 <%= render 'users/user_header' %>
 
-<i class="fab fa-cc-visa"></i>
-<i class="fab fa-cc-mastercard"></i>
-<i class="fab fa-cc-amex"></i>
-<i class="fab fa-cc-jcb"></i>
-(<i class="fab fa-bitcoin"></i>comming soon)
-<%= form_tag(pay_card_index_path, method: :post, id: 'charge-form',  name: "inputForm") do %>
-<label>カード番号</label>
-<%= text_field_tag "number", "", class: "number", placeholder: "半角数字のみ" ,maxlength: "16", type: "text", id: "card_number" %>
-<br>
-<label>有効期限</label>
-<select id="exp_month" name="exp_month", type="text">
-	<option value=""> --</option>
-	<option value="1"> 1</option>
-	<option value="2"> 2</option>
-	<option value="3"> 3</option>
-	<option value="4"> 4</option>
-	<option value="5"> 5</option>
-	<option value="6"> 6</option>
-	<option value="7"> 7</option>
-	<option value="8"> 8</option>
-	<option value="9"> 9</option>
-	<option value="10"> 10</option>
-	<option value="11"> 11</option>
-	<option value="12"> 12</option>
-</select>
+<div class="container">
 
-<span> 月/</span>
-<select id="exp_year" name="exp_year" type="text">
-	<option value=""> --</option>
-	<option value="2020"> 20</option>
-	<option value="2021"> 21</option>
-	<option value="2022"> 22</option>
-	<option value="2023"> 23</option>
-	<option value="2024"> 24</option>
-	<option value="2025"> 25</option>
-	<option value="2026"> 26</option>
-	<option value="2027"> 27</option>
-	<option value="2028"> 28</option>
-	<option value="2029"> 29</option>
-</select>
-<span> 年</span>
-<br>
-<label> セキュリティコード</label>
-<%= text_field_tag "cvc", "", class: "cvc", placeholder: "カード背面3~4桁の番号", maxlength: "4", id: "cvc" %>
-<div id="card_token"></div>
-<%= submit_tag "追加する", id: "token_submit" %>
-<% end %>
+  <div class="row my-3">
+
+    <div class="col-lg-4"></div>
+
+    <div class="col-lg-4 my-3">
+
+    	<h2 class="text-center mb-3">カード登録</h2>
+
+		<i class="fab fa-cc-visa"></i>
+		<i class="fab fa-cc-mastercard"></i>
+		<i class="fab fa-cc-amex"></i>
+		<i class="fab fa-cc-jcb"></i>
+		(<i class="fab fa-bitcoin"></i>comming soon)
+
+		<%= form_tag(pay_card_index_path, method: :post, id: 'charge-form',  name: "inputForm") do %>
+		<div class="form-group mt-2">
+			<label>カード番号</label><br />
+			<%= text_field_tag "number", "", class: "number form-control", placeholder: "半角数字のみ" ,maxlength: "16", type: "text", id: "card_number" %>
+		</div>
+		<div class="form-group mt-2">
+			<label>有効期限</label></br />
+				<select id="exp_month" name="exp_month", type="text">
+					<option value=""> --</option>
+					<option value="1"> 1</option>
+					<option value="2"> 2</option>
+					<option value="3"> 3</option>
+					<option value="4"> 4</option>
+					<option value="5"> 5</option>
+					<option value="6"> 6</option>
+					<option value="7"> 7</option>
+					<option value="8"> 8</option>
+					<option value="9"> 9</option>
+					<option value="10"> 10</option>
+					<option value="11"> 11</option>
+					<option value="12"> 12</option>
+				</select>
+				<span> /</span>
+				<select id="exp_year" name="exp_year" type="text">
+					<option value=""> --</option>
+					<option value="2020"> 20</option>
+					<option value="2021"> 21</option>
+					<option value="2022"> 22</option>
+					<option value="2023"> 23</option>
+					<option value="2024"> 24</option>
+					<option value="2025"> 25</option>
+					<option value="2026"> 26</option>
+					<option value="2027"> 27</option>
+					<option value="2028"> 28</option>
+					<option value="2029"> 29</option>
+				</select>
+				<span> 年</span>
+	    </div>
+		<div class="form-group mt-2">
+			<label> セキュリティコード</label><br />
+			<%= text_field_tag "cvc", "", class: "cvc form-control", placeholder: "カード背面3~4桁の番号", maxlength: "4", id: "cvc" %>
+			<div id="card_token" class="text-center my-3"></div>
+			<%= submit_tag "追加する", id: "token_submit", class:"btn btn-md btn-danger mx-auto d-block" %>
+			<% end %>
+		</div>
+
+    </div>
+
+    <div class="col-lg-4"></div>
+
+  </div>
+</div>
+
+<%= render 'users/user_footer' %>

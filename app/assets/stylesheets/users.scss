@@ -28,9 +28,6 @@
   background-color: #fff;
   z-index: 2;
 }
-.popup-inner img {
-  width: 100%;
-}
 .close-btn {
   position: absolute;
   right: 0;
@@ -54,4 +51,15 @@
   background-color: rgba(0,0,0,.8);
   z-index: 1;
   cursor: pointer;
+}
+.user-information {
+  font-size: 20px;
+}
+.cursor {
+  cursor:  pointer;
+}
+.nav-item:hover {
+  -webkit-transform: translateY(-5px);
+  -ms-transform: translateY(-5px);
+  transform: translateY(-5px);
 }

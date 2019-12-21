@@ -2,6 +2,7 @@ class LecturesController < ApplicationController
 
 	def index
 		@q = Lecture.ransack(params[:q])
+		@location = false
 		@lectures =	@q.result(distict: true).page(params[:page]).per(10)
 	end
 
@@ -9,6 +10,7 @@ class LecturesController < ApplicationController
 		@lecture = Lecture.find(params[:id])
 		@university = @lecture.university
 	if user_signed_in?
+		@payment = Payment.where(user_id: current_user.id)
 		@payment_created_at = Payment.where(user_id: current_user.id).maximum(:created_at)
 	end
 	end
@@ -21,6 +23,8 @@ class LecturesController < ApplicationController
 		@universities.each do |university|
 			@lectures.concat(university.lectures)
 		end
+		@location = true
+		@q = Lecture.ransack()
 		render "index"
 	end
 end

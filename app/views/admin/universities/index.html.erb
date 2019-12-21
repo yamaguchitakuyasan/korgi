@@ -40,6 +40,12 @@
 						</div>
 					<% end %>
 				</div>
+				<div class="col-lg-4">
+					<%= search_form_for(@q, url: admin_universities_path, :class =>"float-right uni-search") do |f| %>
+		      		<%= f.search_field :name_cont %>
+		      		<%= f.submit "検索", :placeholder => "大学名", class:"btn btn-danger btn-sm" %>
+		      		<% end %>
+				</div>
 			</div>
     <!-- 大学一覧 -->
 			<table class="table table-hover table-inverse table-bordered">
@@ -52,7 +58,7 @@
 				</thead>
 				<tbody>
 					<% @universities.each do |university| %>
-						<tr data-href="<%= edit_admin_university_path(university.id) %>">
+						<tr data-href="<%= edit_admin_university_path(university.id) %>" data-turbolinks="false">
 							<td><%= attachment_image_tag(@university, :university_image, size:'80x80', fallback: "no_image.png", class:"img-thumbnail") %></td>
 							<td><%= university.name %></td>
 							<td><%= university.location %></td>
@@ -60,6 +66,8 @@
 					<% end %>
 				</tbody>
 			</table>
-			<%= paginate @universities, :class=>"pagination", :style=>"mx-auto" %>
+			<div data-turbolinks="false">
+				<%= paginate @universities, :class=>"pagination", :style=>"mx-auto" %>
+			</div>
 		</div>
 </div>
