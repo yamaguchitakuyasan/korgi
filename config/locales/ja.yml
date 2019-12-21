@@ -4,7 +4,7 @@ ja:
       user:
       lecture:
       university:
-      lecture/university:
+      university/lectures:
     attributes:
       user:
         name: 名前
@@ -18,7 +18,7 @@ ja:
         required_time: 所要時間
       university:
         name: 大学名
-      lecture/university:
+      university/lectures:
         name: 大学名
   views:
     pagination:
@@ -32,4 +32,6 @@ ja:
       invalid: "入力内容を確認してください"
     sessions:
       user:
+        signed_out: ""
+      admin:
         signed_out: ""

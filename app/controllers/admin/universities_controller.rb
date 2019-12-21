@@ -5,7 +5,8 @@ class Admin::UniversitiesController < ApplicationController
     end
 
 	def index
-		@universities = University.all.page(params[:page]).per(10)
+		@q = University.ransack(params[:q])
+		@universities = @q.result(disinct: true).page(params[:page]).per(10)
 		@university = University.new
 	end
 
