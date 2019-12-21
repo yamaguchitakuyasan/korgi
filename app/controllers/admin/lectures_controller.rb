@@ -46,6 +46,9 @@ class Admin::LecturesController < ApplicationController
 	end
 
 	def destroy
+		@lecture = Lecture.find(params[:id])
+		@lecture.destroy
+		redirect_to admin_lectures_path
 	end
 
 	private

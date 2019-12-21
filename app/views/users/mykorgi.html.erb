@@ -37,23 +37,26 @@
 				<div class="col-lg-1"></div>
 				<div class="col-lg-10">
 					<div class="card-columns" style="text-decoration:none; color:black;">
-					<% @reservations.each do |reservation| %>
-						<% if reservation.lecture.held_at > Date.today %>
-							<%= link_to lecture_path(reservation.lecture.id) do %>
-								<div class="card">
-									<%= attachment_image_tag(reservation.lecture, :lecture_image,size:'300x300', fallback: "no_image.png", class:"img-thumbnail") %>
-									<div class="card-body" style="text-decoration:none; color:black;">
-										<h5 class="card-title" style=" width:100%; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;"><%= reservation.lecture.name %></h5>
-										<span class="card-subtitle">主催：<%= reservation.lecture.university.name %></span>
-										<div class="time-information">
-										<span class="card-text" style="font-size:15px;">日時: <%= reservation.lecture.held_at.strftime("%Y年%m月%d日 %H:%M") %>〜</span><br>
-										<span class="card-text">所要時間: <%= reservation.lecture.required_time %>分</span>
-									    </div>
-									</div>
-								</div>
+						<% @reservations.each do |reservation| %>
+							<% if reservation.lecture.nil? %>
+								<% else %>
+								<% if reservation.lecture.held_at > Date.today %>
+									<%= link_to lecture_path(reservation.lecture.id) do %>
+										<div class="card">
+											<%= attachment_image_tag(reservation.lecture, :lecture_image,size:'300x300', fallback: "no_image.png", class:"img-thumbnail") %>
+											<div class="card-body" style="text-decoration:none; color:black;">
+												<h5 class="card-title" style=" width:100%; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;"><%= reservation.lecture.name %></h5>
+												<span class="card-subtitle">主催：<%= reservation.lecture.university.name %></span>
+												<div class="time-information">
+												<span class="card-text" style="font-size:15px;">日時: <%= reservation.lecture.held_at.strftime("%Y年%m月%d日 %H:%M") %>〜</span><br>
+												<span class="card-text">所要時間: <%= reservation.lecture.required_time %>分</span>
+											    </div>
+											</div>
+										</div>
+									<% end %>
+								<% end %>
 							<% end %>
 						<% end %>
-					<% end %>
 					</div>
 				</div>
 				<div class="col-lg-1"></div>
@@ -96,15 +99,18 @@
 				<div class="col-lg-10">
 					<div class="card-columns" style="text-decoration:none; color:black;">
 					<% @reservations.each do |reservation| %>
-						<% if reservation.lecture.held_at < Date.today %>
-							<%= link_to lecture_path(reservation.lecture.id) do %>
-								<div class="card">
-									<%= attachment_image_tag(reservation.lecture, :lecture_image,size:'300x300', fallback: "no_image.png", class:"img-thumbnail") %>
-									<div class="card-body" style="text-decoration:none; color:black;">
-										<h5 class="card-title" style=" width:100%; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;"><%= reservation.lecture.name %></h5>
-										<span class="card-subtitle">主催：<%= reservation.lecture.university.name %></span>
+						<% if reservation.lecture.nil? %>
+								<% else %>
+							<% if reservation.lecture.held_at < Date.today %>
+								<%= link_to lecture_path(reservation.lecture.id) do %>
+									<div class="card">
+										<%= attachment_image_tag(reservation.lecture, :lecture_image,size:'300x300', fallback: "no_image.png", class:"img-thumbnail") %>
+										<div class="card-body" style="text-decoration:none; color:black;">
+											<h5 class="card-title" style=" width:100%; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;"><%= reservation.lecture.name %></h5>
+											<span class="card-subtitle">主催：<%= reservation.lecture.university.name %></span>
+										</div>
 									</div>
-								</div>
+								<% end %>
 							<% end %>
 						<% end %>
 					<% end %>
