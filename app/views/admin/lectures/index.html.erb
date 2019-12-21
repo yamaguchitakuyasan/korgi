@@ -34,7 +34,9 @@
 						<% end %>
 					</tbody>
 				</table>
-				<%= paginate @lectures, :class=>"pagination" %>
+				<div data-turbolinks="false">
+					<%= paginate @lectures, :class=>"pagination" %>
+				</div>
 			</div>
 		</div>
 </div>
