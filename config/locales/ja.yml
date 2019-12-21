@@ -4,7 +4,7 @@ ja:
       user:
       lecture:
       university:
-      university/lectures:
+      lecture/university:
     attributes:
       user:
         name: 名前
@@ -16,9 +16,11 @@ ja:
         held_at: 開催日時
         top_message: トップメッセージ
         required_time: 所要時間
+        university: 大学名
       university:
         name: 大学名
-      university/lectures:
+        location: 住所
+      lecture/university:
         name: 大学名
   views:
     pagination:
@@ -30,6 +32,7 @@ ja:
   devise:
     failure:
       invalid: "入力内容を確認してください"
+      unauthenticated: "ログインしてください"
     sessions:
       user:
         signed_out: ""

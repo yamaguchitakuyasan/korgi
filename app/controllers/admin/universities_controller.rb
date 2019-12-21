@@ -1,5 +1,7 @@
 class Admin::UniversitiesController < ApplicationController
 
+	before_action :login_required
+
 	def login_required
         redirect_to new_admin_session_path unless current_admin
     end
@@ -11,11 +13,13 @@ class Admin::UniversitiesController < ApplicationController
 	end
 
 	def create
-		university = University.new(university_params)
-		if  university.save
+		@university = University.new(university_params)
+		if
+			@university.save
 			redirect_to admin_universities_path
-		else	@universities = University.all.page(params[:page]).per(10)
-			@university = University.new
+		else
+			@q = University.ransack(params[:q])
+			@universities = @q.result(disinct: true).page(params[:page]).per(10)
 			render :index
 		end
 	end
@@ -25,9 +29,13 @@ class Admin::UniversitiesController < ApplicationController
 	end
 
 	def update
-		university = University.find(params[:id])
-		university.update(university_params)
-		redirect_to admin_universities_path
+		@university = University.find(params[:id])
+		if
+			@university.update(university_params)
+			redirect_to admin_universities_path
+		else
+			render :edit
+		end
 	end
 
 	private

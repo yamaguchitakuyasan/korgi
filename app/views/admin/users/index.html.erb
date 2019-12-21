@@ -34,7 +34,9 @@
 						<% end %>
 					</tbody>
 				</table>
-				<%= paginate @users, :class=>"pagination" %>
+				<div class="pgaginate mx-auto" style="font-size:20px;">
+					<%= paginate @users, :class=>"pagination" %>
+				</div>
 			</div>
 		</div>
 </div>

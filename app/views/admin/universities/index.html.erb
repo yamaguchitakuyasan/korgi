@@ -10,12 +10,12 @@
 
 					<% if @university.errors.any? %>
 				     	<div id="error_explanation">
-				     		<h3>入力した内容に誤りがあります</h3>
-				     		<h6 style="list-style:none; color:red; font-size:15px;">
+				     		<h4>入力した内容に誤りがあります</h4>
+				     		<h6 style="list-style:none; font-size:15px;">
 				     			<% @university.errors.full_messages.each do |message| %>
 				     				<li><%= message %></li>
-				     			<% end %>
-				    		 </h6>
+				     		<% end %>
+				    		</h6>
 				     	</div>
     		     	<% end %>
 
@@ -59,14 +59,14 @@
 				<tbody>
 					<% @universities.each do |university| %>
 						<tr data-href="<%= edit_admin_university_path(university.id) %>" data-turbolinks="false">
-							<td><%= attachment_image_tag(@university, :university_image, size:'80x80', fallback: "no_image.png", class:"img-thumbnail") %></td>
+							<td><%= attachment_image_tag(university, :university_image, size:'80x80', fallback: "no_image.png", class:"img-thumbnail") %></td>
 							<td><%= university.name %></td>
 							<td><%= university.location %></td>
 						</tr>
 					<% end %>
 				</tbody>
 			</table>
-			<div data-turbolinks="false">
+			<div class="pgaginate" style="font-size:20px;" data-turbolinks="false">
 				<%= paginate @universities, :class=>"pagination", :style=>"mx-auto" %>
 			</div>
 		</div>

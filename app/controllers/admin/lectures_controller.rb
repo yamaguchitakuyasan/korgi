@@ -36,12 +36,12 @@ class Admin::LecturesController < ApplicationController
 	end
 
 	def update
-		lecture = Lecture.find(params[:id])
-		if lecture.update(lecture_params)
-		   redirect_to admin_lecture_path(lecture.id)
+		@lecture = Lecture.find(params[:id])
+		if
+			@lecture.update(lecture_params)
+		   	redirect_to admin_lecture_path(@lecture.id)
 		else
-		   @lecture = Lecture.find(params[:id])
-		   render :edit
+		  	render :edit
 		end
 	end
 
