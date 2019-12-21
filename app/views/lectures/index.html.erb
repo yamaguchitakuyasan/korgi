@@ -55,9 +55,9 @@
 				<% @lectures.each do |lecture| %>
 				<%= link_to lecture_path(lecture.id) do %>
 					<div class="card border-secondary">
-						<%= attachment_image_tag(@lecture, :lecture_image,size:'300x300', fallback: "no_image.png", class:"img-thumbnail") %>
+						<%= attachment_image_tag(@lecture, :lecture_image, :fill, 300, 300, fallback: "no_image.png", class:"img-thumbnail") %>
 						<div class="card-body" style="text-decoration:none; color:black;">
-							<% if lecture.created_at > Time.current - 1.hour %>
+							<% if lecture.held_at > Time.current - 1.hour %>
 								<span style="color:red;">すぐ受けられます！</span>
 							<% else %>
 								<span style="color:white;">空白</span>
