@@ -20,6 +20,7 @@
 					<thead>
 						<tr class="table-active">
 							<th>ユーザ名</th>
+							<th>email</th>
 							<th>出身大学</th>
 							<th>専攻</th>
 						</tr>
@@ -28,14 +29,15 @@
 						<% @users.each do |user| %>
 							<tr>
 								<td><%= user.name %></td>
+								<td><%= user.email %></td>
 								<td><%= user.former_university %></td>
 								<td><%= user.major %></td>
 							</tr>
 						<% end %>
 					</tbody>
 				</table>
-				<div class="pgaginate mx-auto" style="font-size:20px;">
-					<%= paginate @users, :class=>"pagination" %>
+				<div class="pgaginate text-center" style="font-size:20px;">
+					<%= paginate @users %>
 				</div>
 			</div>
 		</div>
