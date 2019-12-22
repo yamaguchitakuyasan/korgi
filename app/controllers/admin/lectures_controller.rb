@@ -8,7 +8,7 @@ class Admin::LecturesController < ApplicationController
 
 	def index
 		@q = Lecture.ransack(params[:q])
-		@lectures = @q.result(distict: true).page(params[:page]).per(20)
+		@lectures = @q.result(distict: true).page(params[:page]).per(10)
 	end
 
 	def new

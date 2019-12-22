@@ -3,7 +3,7 @@ class LecturesController < ApplicationController
 	def index
 		@q = Lecture.ransack(params[:q])
 		@location = false
-		@lectures =	@q.result(distict: true).page(params[:page]).per(10)
+		@lectures =	@q.result(distict: true).page(params[:page]).per(12)
 	end
 
 	def show

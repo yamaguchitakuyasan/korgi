@@ -53,25 +53,25 @@
 		<div class="col-lg-9 my-5">
 			<div class="card-columns" style="text-decoration:none; color:black;">
 				<% @lectures.each do |lecture| %>
-				<%= link_to lecture_path(lecture.id) do %>
-					<div class="card border-secondary">
-							<%= attachment_image_tag(lecture, :lecture_image, :fill, 300, 225, fallback: "no_image.png", class:"img-thumbnail") %>
-						<div class="card-body" style="text-decoration:none; color:black;">
-							<% if lecture.held_at < Time.current + 1.hour && lecture.held_at > Time.current %>
-								<span style="color:red;">すぐ受けられます！</span>
-							<% else %>
-								<span style="color:white;">空白</span>
-							<% end %>
-								<h4 class="card-title" style=" width:100%; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;"><%= lecture.name %></h4>
-								<span class="card-subtitle">主催：<%= lecture.university.name %></span>
-								<div class="time-information">
-								<span class="card-text ">日時: <%= lecture.held_at.strftime("%Y年%m月%d日 %H:%M") %>〜</span>
-								<span class="card-text">所要時間: <%= lecture.required_time %>分</span>
-							    </div>
-								<span class="card-text float-right mb-2"><%= lecture.favorites.count %>件のお気に入り</span>
+					<%= link_to lecture_path(lecture.id) do %>
+						<div class="card border-secondary">
+								<%= attachment_image_tag(lecture, :lecture_image, :fill, 300, 225, fallback: "no_image.png", class:"img-thumbnail") %>
+							<div class="card-body" style="text-decoration:none; color:black;">
+								<% if lecture.held_at < Time.current + 1.hour && lecture.held_at > Time.current %>
+									<span style="color:red;">すぐ受けられます！</span>
+								<% else %>
+									<span style="color:white;">空白</span>
+								<% end %>
+									<h4 class="card-title" style=" width:100%; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;"><%= lecture.name %></h4>
+									<span class="card-subtitle">主催：<%= lecture.university.name %></span>
+									<div class="time-information">
+									<span class="card-text ">日時: <%= lecture.held_at.strftime("%Y年%m月%d日 %H:%M") %>〜</span>
+									<span class="card-text">所要時間: <%= lecture.required_time %>分</span>
+								    </div>
+									<span class="card-text float-right mb-2"><i class="fab fa-gratipay" style="font-size:23px;"></i><%= lecture.favorites.count %></span>
+							</div>
 						</div>
-					</div>
-				<% end %>
+					<% end %>
 				<% end %>
 			</div>
 		</div>

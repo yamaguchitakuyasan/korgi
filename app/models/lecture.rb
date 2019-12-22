@@ -1,7 +1,7 @@
 class Lecture < ApplicationRecord
 
-	has_many :favorites
-	has_many :reservations
+	has_many :favorites, dependent: :destroy
+	has_many :reservations, dependent: :destroy
 
 	belongs_to :university
 

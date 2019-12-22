@@ -10,7 +10,6 @@
 
 					<% if @university.errors.any? %>
 				     	<div id="error_explanation">
-				     		<h4>入力した内容に誤りがあります</h4>
 				     		<h6 style="list-style:none; font-size:15px;">
 				     			<% @university.errors.full_messages.each do |message| %>
 				     				<li><%= message %></li>
@@ -66,8 +65,8 @@
 					<% end %>
 				</tbody>
 			</table>
-			<div class="pgaginate" style="font-size:20px;" data-turbolinks="false">
-				<%= paginate @universities, :class=>"pagination", :style=>"mx-auto" %>
+			<div class="text-center mb-3" style="font-size:20px;" data-turbolinks="false">
+				<%= paginate @universities %>
 			</div>
 		</div>
 </div>
