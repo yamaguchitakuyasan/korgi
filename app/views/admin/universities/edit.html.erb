@@ -25,7 +25,6 @@
 				<div class="field">
 					<% if @university.errors.any? %>
 				     	<div id="error_explanation">
-				     		<h4>入力した内容に誤りがあります</h4>
 				     		<h6 style="list-style:none; font-size:15px;">
 				     			<% @university.errors.full_messages.each do |message| %>
 				     				<li><%= message %></li>

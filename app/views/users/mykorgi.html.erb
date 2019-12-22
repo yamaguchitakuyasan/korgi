@@ -31,7 +31,7 @@
 
 			<!-- 予約講義 -->
 			<div class="row reserved_lecture my-2">
-				<h5> <i class="fas fa-user-clock"></i>予約中の講義</h5>
+				<h5> <i class="fas fa-user-clock"></i> 予約中の講義</h5>
 			</div>
 			<div class="row reserved_lecture my-2">
 				<div class="col-lg-1"></div>
@@ -64,14 +64,16 @@
 
 			<!--　お気に入り講義 -->
 			<div class="row favorited_lecture my-2">
-				<h5> <i class="fab fa-gratipay"></i>お気に入りの講義</h5>
+				<h5> <i class="fab fa-gratipay" style="font-size:23px;"></i>お気に入りの講義</h5>
 			</div>
 			<div class="row reserved_lecture my-2">
 				<div class="col-lg-1"></div>
 				<div class="col-lg-10">
 					<div class="card-columns" style="text-decoration:none; color:black;">
 					<% @favorites.each do |favorite| %>
-						<%= link_to lecture_path(favorite.lecture.id) do %>
+						<% if favorite.lecture.nil? %>
+						<% else %>
+							<%= link_to lecture_path(favorite.lecture.id) do %>
 							<div class="card">
 								<%= attachment_image_tag(favorite.lecture, :lecture_image,size:'300x300', fallback: "no_image.png", class:"img-thumbnail") %>
 								<div class="card-body" style="text-decoration:none; color:black;">
@@ -83,6 +85,7 @@
 									</div>
 								</div>
 							</div>
+							<% end %>
 						<% end %>
 					<% end %>
 					</div>
@@ -92,7 +95,7 @@
 
 			<!-- 受講済講義　-->
 			<div class="row attended_lecture my-3">
-				<h5> <i class="fas fa-calendar-check"></i>受講済みの講義</h5>
+				<h5> <i class="fas fa-calendar-check"></i> 受講済みの講義</h5>
 			</div>
 			<div class="row attended_lecture my-2">
 				<div class="col-lg-1"></div>
@@ -100,7 +103,7 @@
 					<div class="card-columns" style="text-decoration:none; color:black;">
 					<% @reservations.each do |reservation| %>
 						<% if reservation.lecture.nil? %>
-								<% else %>
+						<% else %>
 							<% if reservation.lecture.held_at < Date.today %>
 								<%= link_to lecture_path(reservation.lecture.id) do %>
 									<div class="card">
