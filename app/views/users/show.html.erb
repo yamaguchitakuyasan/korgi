@@ -12,8 +12,8 @@
 
 				<div class="row">
 					<div class="col-lg-3"></div>
-					<div class="col-lg-6 text-center">
-						<div class="row mx-auto">
+					<div class="col-lg-6">
+						<div class="row mx-auto d-block">
 							<div class="user-name mt-2 mb-1 mr-5">
 								<span>ユーザ名</span><br />
 								<span class="user-information border-bottom"><%= @user.name %></span>
@@ -37,7 +37,7 @@
 						</div>
 
 							<% if @user.id == current_user.id %>
-								<%= link_to "アカウントを編集する", edit_user_path(@user),:class=>"btn btn-md btn-danger my-3" %>
+								<%= link_to "アカウントを編集する", edit_user_path(@user),:class=>"btn btn-md btn-danger my-3 mx-auto d-block" %>
 							<% end %>
 					</div>
 				<div class="col-lg-3"></div>

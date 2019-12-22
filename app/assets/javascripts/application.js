@@ -23,3 +23,7 @@ $(document).ready(function(){
 		window.location = $(this).data("href");
 	});
 });
+
+$(function() {
+  $('section').hide().fadeIn(5000);
+});

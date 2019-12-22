@@ -35,7 +35,9 @@ ja:
       unauthenticated: "ログインしてください"
     sessions:
       user:
+        signed_in: ""
         signed_out: ""
+        signed_up: ""
       admin:
         signed_in: ""
         signed_out: ""
