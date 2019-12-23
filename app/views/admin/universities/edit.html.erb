@@ -1,0 +1,82 @@
+<div class="row">
+	<%= render partial: "admin/admin_header" %>
+		<!-- 大学登録 -->
+		<div class="col-lg-1">
+		</div>
+
+	<!-- トップ -->
+		<div class="col-lg-8">
+			<div class="row">
+				<div class="col-lg-10">
+					<h3 class="my-3"><%= @university.name %></h3>
+				</div>
+			</div>
+
+	<!-- 大学名・所在地 -->
+		<%= form_for(@university, url:"/admin/universities/#{@university.id}") do |f| %>
+		<div class="row">
+			<div class="col-lg-5">
+				<%= attachment_image_tag(@university, :university_image, size:'300x300', fallback: "no_image.png", class:"img-thumbnail") %>
+				<div class="field">
+					<%= f.attachment_field :university_image, :class =>"my-3" %>
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<div class="field">
+					<% if @university.errors.any? %>
+				     	<div id="error_explanation">
+				     		<h6 style="list-style:none; font-size:15px;">
+				     			<% @university.errors.full_messages.each do |message| %>
+				     				<li><%= message %></li>
+				     		<% end %>
+				    		</h6>
+				     	</div>
+    		     	<% end %>
+					<span>大学名：　</span>
+					<%= f.text_field :name, :class =>"form-control my-3" %>
+				</div>
+				<div class="field">
+					<span>住所：　</span>
+					<%= f.text_field :location, :class =>"form-control my-3" %>
+				</div>
+				<div class="uni-up-action">
+					<%= f.submit '更新', :class=>"btn btn-md btn-danger my-3 float-right", data: { confirm: "「#{@university.name}」を更新します"} %>
+				</div>
+			</div>
+			<div class-="col-lg-1"></div>
+		</div>
+		<% end %>
+
+	<!-- 地図 -->
+		<div id=map></div>
+		<script type="text/javascript">
+		  function initMap() {
+
+		    var test = {lat: <%= @university.latitude %>, lng: <%= @university.longitude %>};
+		    var map = new google.maps.Map(document.getElementById('map'), {
+		      zoom: 15,
+		      center: test
+		    });
+		    var transitLayer = new google.maps.TransitLayer();
+		    transitLayer.setMap(map);
+
+		    var contentString = '住所：<%= @university.location %>';
+		    var infowindow = new google.maps.InfoWindow({
+		      content: contentString
+		    });
+
+		    var marker = new google.maps.Marker({
+		      position:test,
+		      map: map,
+		      title: contentString
+		    });
+
+		    marker.addListener('click', function() {
+		      infowindow.open(map, marker);
+		    });
+		  }
+		</script>
+		<script async defer
+		  src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyAWKdtZHy3XPl9RzmpRzPO3Jhql_tWeIU4&callback=initMap">
+		</script>
+</div>

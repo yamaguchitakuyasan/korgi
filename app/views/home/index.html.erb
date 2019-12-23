@@ -1,0 +1,31 @@
+<section id="main-visual" class="mb-3">
+</section>
+<%= render 'users/user_header' %>
+<div class="container">
+	<div class="row contents-top mt-5">
+		<div class="col-lg-3"></div>
+		<div class="col-lg-6">
+			<div class="contents-top text-center">
+				<h4 class="my-3" style="font-family:AvenirLTStd-Medium; font-style:italic;text-decoration: underline;">Contents</h4>
+			</div>
+		</div>
+		<div class="col-lg-3"></div>
+	</div>
+	<div class="row contents mt-5">
+		<div class="col-lg-11 mx-auto d-block mb-5">
+			<%= link_to image_tag("/assets/find_lecture.png", size: '225x225'), lectures_path, class:"ml-4 mr-3" %>
+			<% if user_signed_in? %>
+				<%= link_to image_tag("/assets/my_korgi_image.png", size: '225x225'), mykorgi_path(current_user.id), class:"mr-3" %>
+			<% else %>
+				<%= link_to image_tag("/assets/my_korgi_image.png", size: '225x225'), new_user_session_path, class:"mr-3" %>
+			<% end %>
+			<% if user_signed_in? %>
+				<%= link_to image_tag("/assets/sign_up.png", size: '225x225'), lectures_path, class:"mr-3" %>
+			<% else %>
+				<%= link_to image_tag("/assets/sign_up.png", size: '225x225'), new_user_registration_path, class:"mr-3" %>
+			<% end %>
+			<%= link_to image_tag("/assets/contact.png", size: '225x225'), root_path %>
+		</div>
+	</div>
+</div>
+<%= render 'users/user_footer' %>

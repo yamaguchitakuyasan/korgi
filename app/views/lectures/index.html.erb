@@ -1,0 +1,86 @@
+<%= render 'users/user_header' %>
+
+<div class="container">
+	<div class="row">
+		<div class="col-lg-3 my-4">
+			<div class="search-box" style="position: fixed;">
+				<h5 class="mb-3">講義を探す</h5>
+
+				<div class="phrase-search">
+					<%= search_form_for(@q, url:lectures_path) do |f| %>
+						<%= f.search_field :name_or_university_name_cont, :placeholder => "フリーワード", class:"serch-form" %>
+						<%= f.submit "検索", class:"btn btn-sm btn-danger mb-1" %>
+					<% end %>
+				</div>
+
+				<div class="currentLocation my-3">
+					<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWKdtZHy3XPl9RzmpRzPO3Jhql_tWeIU4&callback=initMap"></script>
+
+					<span><img src="/assets/current_location.jpeg" style="width:30px">現在地から検索する</span><br>
+					<%= form_tag current_location_path, name: "user_location", method: :post do %>
+						<input type="hidden" id="lat" name="lat_number" value="">
+						<input type="hidden" id="lon" name="lon_number" value="">
+						<input type="button" id="location" value="講義を検索" onclick="getMyPlace()" >
+					<% end %>
+					<span>※時間がかかることがあります</span>
+
+					<script>
+						function getMyPlace() {
+						  // var output = document.getElementById("result");
+						  if (!navigator.geolocation){
+						    output.innerHTML = "<p>Geolocationはあなたのブラウザーでサポートされておりません</p>";
+						    return;
+						  }
+						  function success(position) {
+						    var latitude  = position.coords.latitude;
+						    var longitude = position.coords.longitude;
+						    // output.innerHTML = '<p>緯度 ' + latitude + '° <br>経度 ' + longitude + '°</p>';
+						    document.getElementById( "lat" ).value = latitude ;
+						    document.getElementById( "lon" ).value = longitude ;
+						    document.user_location.submit();
+						  };
+						  function error() {
+						    output.innerHTML = "座標位置を取得できません";
+						  };
+						  navigator.geolocation.getCurrentPosition(success, error);
+						}
+					</script>
+
+				</div>
+			</div>
+		</div>
+
+		<div class="col-lg-9 my-5">
+			<div class="card-columns" style="text-decoration:none; color:black;">
+				<% @lectures.each do |lecture| %>
+					<%= link_to lecture_path(lecture.id) do %>
+						<div class="card border-secondary">
+								<%= attachment_image_tag(lecture, :lecture_image, :fill, 300, 225, fallback: "no_image.png", class:"img-thumbnail") %>
+							<div class="card-body" style="text-decoration:none; color:black;">
+								<% if lecture.held_at < Time.current + 1.hour && lecture.held_at > Time.current %>
+									<span style="color:red;">すぐ受けられます！</span>
+								<% else %>
+									<span style="color:white;">空白</span>
+								<% end %>
+									<h4 class="card-title" style=" width:100%; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;"><%= lecture.name %></h4>
+									<span class="card-subtitle">主催：<%= lecture.university.name %></span>
+									<div class="time-information">
+									<span class="card-text ">日時: <%= lecture.held_at.strftime("%Y年%m月%d日 %H:%M") %>〜</span>
+									<span class="card-text">所要時間: <%= lecture.required_time %>分</span>
+								    </div>
+									<span class="card-text float-right mb-2"><i class="fab fa-gratipay" style="font-size:23px;"></i><%= lecture.favorites.count %></span>
+							</div>
+						</div>
+					<% end %>
+				<% end %>
+			</div>
+		</div>
+
+		 <div class="pgaginate mx-auto" style="font-size:20px;">
+		<% if @location == false %>
+			<%= paginate @lectures %>
+		<% end %>
+		</div>
+	</div>
+</div>
+<%= render 'users/user_footer' %>

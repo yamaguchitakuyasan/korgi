@@ -1,0 +1,62 @@
+<%= render 'users/user_header' %>
+
+<div class="container">
+
+	<div class="row">
+
+		<div class="col-lg-4"></div>
+
+		<div class="col-lg-4 my-3">
+			<h4 class="text-center">プロフィール編集</h4>
+
+				<div class="error-message-flash my-3">
+				    <% if @user.errors.any? %>
+				    	<h5>入力内容を確認してください</h5>
+					      <% @user.errors.full_messages.each do |message| %>
+					        <li style="list-style: none;"><%= message %></li>
+					      <% end %>
+				    <% end %>
+ 		 		</div>
+
+				<%= form_for(@user) do |f| %>
+
+				<div class="form-group">
+				<label for="user_profile_image"></label>
+				<%= attachment_image_tag(@user, :profile_image, :fill, 100, 100, fallback: "no_image.png", class:"img-thumbnail rounded-circle mx-auto d-block") %><br />
+				<%= f. attachment_field :profile_image, placeholder: "プロフィール画像", class: "user-edit-form float-right" %><br />
+				</div>
+
+				<div class="form-group">
+				<label for="user_name">ユーザ名</label>
+				<span style="color:red; font-size:15px;">*必須</span><br />
+				<%= f. text_field :name,:class => "form-control" %>
+				</div>
+
+				<div class="form-group">
+				<label for="メールアドレス">メールアドレス</label>
+				<span style="color:red; font-size:15px;">*必須</span><br />
+				<%= f. text_field :email,:class => "form-control" %>
+				</div>
+
+				<div class="form-group">
+				<label for="former_university">出身大学</label>
+				<%= f. text_field :former_university,:class => "form-control" %>
+				</div>
+
+				<div class="form-group mb-4">
+				<label for="major">専攻</label>
+				<%= f. text_field :major,:class => "form-control" %>
+				</div>
+
+				<div class="actions">
+    			<%= f.submit '更新する', :class=>"btn btn-md btn-danger mx-auto d-block" %>
+  				</div>
+
+				<% end %>
+		</div>
+
+		<div class="col-lg-4"></div>
+
+	</div>
+</div>
+<%= render 'users/user_footer' %>

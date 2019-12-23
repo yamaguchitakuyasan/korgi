@@ -1,0 +1,67 @@
+<div class="row">
+	<%= render partial: "admin/admin_header" %>
+
+		<div class="col-lg-1">
+		</div>
+
+		<div class="col-lg-8 my-3">
+			<div class="row">
+				<div class="col-lg-8">
+					<h4><%= @lecture.name %></h4>
+					<h6>主催: <%= @university.name %></h6>
+					<h6>開催日時: <%= @lecture.held_at.strftime("%Y年%m月%d日 %H:%M") %>-</h6>
+					<h6>所要時間: <%= @lecture.required_time %>分</h6>
+				</div>
+				<div class="col-lg-4">
+					<div class="btn float-right">
+						<%= link_to("編集", edit_admin_lecture_path(@lecture.id), {class: "btn btn-md btn-danger"}) %>
+						<%= link_to("戻る", admin_lectures_path, :class=>"btn btn-md btn-secondary", data: {"turbolinks" => false}) %>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="row description">
+
+				<div class="col-lg-4">
+					<%= attachment_image_tag(@lecture, :lecture_image, size:'500x500', fallback: "no_image.png", class:"img-thumbnail") %>
+				</div>
+
+				<div class="col-lg-8">
+					<h6><%= @lecture.top_message %></h6>
+					<p><%= @lecture.description %></p>
+					<% @lecture.tag_list.each do |tag| %>
+					<span>テーマ:  #<%= tag %> </span><br>
+					<span class="float-right">開催場所: <%= @university.location %></span>
+					<% end %>
+				</div>
+
+			</div>
+
+			<div class="row reservation_user">
+				<div class="col-lg-2"></div>
+					<div class="col-lg-8 my-3">
+						<h4>予約中のユーザ</h4>
+						<table class="table table-hover table-inverse">
+							<tbody>
+								<% @reservations.each do |reservation| %>
+									<tr>
+										<td></td>
+										<td><%= reservation.user.name %></td>
+										<td><%= reservation.created_at.strftime("%y年%m月%d日") %></td>
+									</tr>
+								<% end %>
+							</tbody>
+						</table>
+					<div class="row destroy-btn">
+						<div class="col"></div>
+							<div class="col-lg-2">
+								<%= link_to("講義の削除", admin_lecture_path(@lecture.id), { method: :delete, data: { confirm: "この講義を削除します。"}, class: "btn btn-md btn-danger mx-auto"}) %>
+							</div>
+						<div class="col"></div>
+					</div>
+					</div>
+				<div class="col-lg-2"></div>
+			</div>
+		</div>
+</div>

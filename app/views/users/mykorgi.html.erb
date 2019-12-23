@@ -1,0 +1,131 @@
+<%= render 'users/user_header' %>
+
+<div class="container">
+
+	<div class="row">
+
+		<div class="col"></div>
+
+		<div class="col-lg-10">
+
+				<h3 class="my-3 text-center">MY korgi</h3>
+
+			<!-- トップ -->
+			<div class="row user_information mb-5">
+				<div class="col-lg-2">
+				</div>
+				<div class="col-lg-8 text-center">
+					<div class="row profile">
+						<div class="col-lg-6">
+							<%= attachment_image_tag(@user, :profile_image, :fill, 180, 180, fallback: "no_image.png", class:"img-thumbnail rounded-circle") %>
+						</div>
+						<div class="col-lg-6 border-left my-2">
+							<h5 class="my-3">ユーザ</h5>
+							<h4><%= @user.name %></h4>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-2">
+				</div>
+			</div>
+
+			<!-- 予約講義 -->
+			<div class="row reserved_lecture my-2">
+				<h5> <i class="fas fa-user-clock"></i> 予約中の講義</h5>
+			</div>
+			<div class="row reserved_lecture my-2">
+				<div class="col-lg-1"></div>
+				<div class="col-lg-10">
+					<div class="card-columns" style="text-decoration:none; color:black;">
+						<% @reservations.each do |reservation| %>
+							<% if reservation.lecture.nil? %>
+								<% else %>
+								<% if reservation.lecture.held_at > Date.today %>
+									<%= link_to lecture_path(reservation.lecture.id) do %>
+										<div class="card">
+											<%= attachment_image_tag(reservation.lecture, :lecture_image,size:'300x300', fallback: "no_image.png", class:"img-thumbnail") %>
+											<div class="card-body" style="text-decoration:none; color:black;">
+												<h5 class="card-title" style=" width:100%; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;"><%= reservation.lecture.name %></h5>
+												<span class="card-subtitle">主催：<%= reservation.lecture.university.name %></span>
+												<div class="time-information">
+												<span class="card-text" style="font-size:15px;">日時: <%= reservation.lecture.held_at.strftime("%Y年%m月%d日 %H:%M") %>〜</span><br>
+												<span class="card-text">所要時間: <%= reservation.lecture.required_time %>分</span>
+											    </div>
+											</div>
+										</div>
+									<% end %>
+								<% end %>
+							<% end %>
+						<% end %>
+					</div>
+				</div>
+				<div class="col-lg-1"></div>
+			</div>
+
+			<!--　お気に入り講義 -->
+			<div class="row favorited_lecture my-2">
+				<h5> <i class="fab fa-gratipay" style="font-size:23px;"></i>お気に入りの講義</h5>
+			</div>
+			<div class="row reserved_lecture my-2">
+				<div class="col-lg-1"></div>
+				<div class="col-lg-10">
+					<div class="card-columns" style="text-decoration:none; color:black;">
+					<% @favorites.each do |favorite| %>
+						<% if favorite.lecture.nil? %>
+						<% else %>
+							<%= link_to lecture_path(favorite.lecture.id) do %>
+							<div class="card">
+								<%= attachment_image_tag(favorite.lecture, :lecture_image,size:'300x300', fallback: "no_image.png", class:"img-thumbnail") %>
+								<div class="card-body" style="text-decoration:none; color:black;">
+									<h5 class="card-title" style=" width:100%; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;"><%= favorite.lecture.name %></h5>
+									<span class="card-subtitle">主催：<%= favorite.lecture.university.name %></span>
+									<div class="time-information">
+									<span class="card-text" style="font-size:15px;">日時: <%= favorite.lecture.held_at.strftime("%Y年%m月%d日 %H:%M") %>〜</span><br>
+									<span class="card-text">所要時間: <%= favorite.lecture.required_time %>分</span>
+									</div>
+								</div>
+							</div>
+							<% end %>
+						<% end %>
+					<% end %>
+					</div>
+				</div>
+				<div class="col-lg-1"></div>
+			</div>
+
+			<!-- 受講済講義　-->
+			<div class="row attended_lecture my-3">
+				<h5> <i class="fas fa-calendar-check"></i> 受講済みの講義</h5>
+			</div>
+			<div class="row attended_lecture my-2">
+				<div class="col-lg-1"></div>
+				<div class="col-lg-10">
+					<div class="card-columns" style="text-decoration:none; color:black;">
+					<% @reservations.each do |reservation| %>
+						<% if reservation.lecture.nil? %>
+						<% else %>
+							<% if reservation.lecture.held_at < Date.today %>
+								<%= link_to lecture_path(reservation.lecture.id) do %>
+									<div class="card">
+										<%= attachment_image_tag(reservation.lecture, :lecture_image,size:'300x300', fallback: "no_image.png", class:"img-thumbnail") %>
+										<div class="card-body" style="text-decoration:none; color:black;">
+											<h5 class="card-title" style=" width:100%; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;"><%= reservation.lecture.name %></h5>
+											<span class="card-subtitle">主催：<%= reservation.lecture.university.name %></span>
+										</div>
+									</div>
+								<% end %>
+							<% end %>
+						<% end %>
+					<% end %>
+					</div>
+				</div>
+				<div class="col-lg-1"></div>
+			</div>
+
+		</div>
+		<div class="col"></div>
+
+	</div>
+
+</div>
+<%= render 'users/user_footer' %>
