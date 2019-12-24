@@ -25,10 +25,13 @@
 					<p><%= @lecture.description %></p>
 
 					<!-- タグ -->
-					<% @lecture.tag_list.each do |tag| %>
-					<span>テーマ:  #<%= tag %> </span><br>
-					<% end %>
-					<span class="float-right">開催場所: <%= @university.location %></span>
+					<div class=thema-tag>
+						<i class="fas fa-tags"></i>
+						<% @lecture.tag_list.each do |tag| %>
+						#<%= tag %>
+						<% end %>
+					</div>
+						<span class="float-right">開催場所: <%= @university.location %></span>
 				</div>
 			</div>
 			<div class="row favorite">

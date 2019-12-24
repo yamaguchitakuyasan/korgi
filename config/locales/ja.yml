@@ -29,6 +29,7 @@ ja:
     failure:
       invalid: "入力内容を確認してください"
       unauthenticated: "ログインしてください"
+      not_found_in_database: "入力内容を確認してください"
     sessions:
       user:
         signed_in: ""

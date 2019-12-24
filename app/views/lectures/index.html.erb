@@ -16,7 +16,7 @@
 				<div class="currentLocation my-3">
 					<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWKdtZHy3XPl9RzmpRzPO3Jhql_tWeIU4&callback=initMap"></script>
 
-					<span><img src="/assets/current_location.jpeg" style="width:30px">現在地から検索する</span><br>
+					<span><i class="fas fa-location-arrow" ></i>現在地から検索する</span><br>
 					<%= form_tag current_location_path, name: "user_location", method: :post do %>
 						<input type="hidden" id="lat" name="lat_number" value="">
 						<input type="hidden" id="lon" name="lon_number" value="">

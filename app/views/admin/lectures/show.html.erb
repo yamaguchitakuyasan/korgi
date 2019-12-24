@@ -30,8 +30,12 @@
 				<div class="col-lg-8">
 					<h6><%= @lecture.top_message %></h6>
 					<p><%= @lecture.description %></p>
-					<% @lecture.tag_list.each do |tag| %>
-					<span>テーマ:  #<%= tag %> </span><br>
+					<div class=thema-tag>
+						<i class="fas fa-tags"></i>
+						<% @lecture.tag_list.each do |tag| %>
+						#<%= tag %>
+						<% end %>
+					</div>
 					<span class="float-right">開催場所: <%= @university.location %></span>
 					<% end %>
 				</div>
