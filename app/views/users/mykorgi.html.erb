@@ -43,7 +43,7 @@
 								<% if reservation.lecture.held_at > Date.today %>
 									<%= link_to lecture_path(reservation.lecture.id) do %>
 										<div class="card">
-											<%= attachment_image_tag(reservation.lecture, :lecture_image,size:'300x300', fallback: "no_image.png", class:"img-thumbnail") %>
+											<%= attachment_image_tag(reservation.lecture, :lecture_image, :fill, 300, 225, fallback: "no_image.png", class:"img-thumbnail") %>
 											<div class="card-body" style="text-decoration:none; color:black;">
 												<h5 class="card-title" style=" width:100%; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;"><%= reservation.lecture.name %></h5>
 												<span class="card-subtitle">主催：<%= reservation.lecture.university.name %></span>
