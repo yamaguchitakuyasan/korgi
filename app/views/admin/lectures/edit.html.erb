@@ -11,7 +11,6 @@
 		 		<!-- バリデーション -->
 		 		 <% if @lecture.errors.any? %>
 			     	<div id="error_explanation">
-			     		<h3>入力した内容に誤りがあります</h3>
 			     		<h6 style="list-style:none; font-size:15px;">
 			     			<% @lecture.errors.full_messages.each do |message| %>
 			     				<li><%= message %></li>
