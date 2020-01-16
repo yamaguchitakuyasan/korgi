@@ -11,15 +11,15 @@ RSpec.describe User, type: :model do
     end
 
     it "Reservationモデルを多数持っている" do
-      is_expected.to has_many(:reservations)
+      is_expected.to have_many(:reservations)
     end
 
     it "Paymentモデルを一つ持っている" do
-      is_expected.to has_one(:payment)
+      is_expected.to have_one(:payment)
     end
 
     it "Cardモデルを一つ持っている" do
-      is_expected.to has_one(:card)
+      is_expected.to have_one(:card)
     end
   end
 
