@@ -10,6 +10,6 @@ FactoryBot.define do
 	end
 
 	after(:create) do |lecture|
-			create_list(:favorite, 3, lecture: lecture)
+			create_list(:favorite, 1, lecture: lecture)
 	end
 end

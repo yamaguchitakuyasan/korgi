@@ -5,21 +5,17 @@ RSpec.describe User, type: :model do
     @user = build(:user)
   end
 
-  describe 'アソシエーション' do
-    it "Favoriteモデルを多数持っている" do
-      is_expected.to has_many(:favorites)
+  describe 'アソシエーションのテスト' do
+    context 'Favoriteモデルとの関係' do
+      it '1:Nとなっている' do
+        expect(User.reflect_on_association(:favorites).macro).to eq :has_many
+      end
     end
 
-    it "Reservationモデルを多数持っている" do
-      is_expected.to have_many(:reservations)
-    end
-
-    it "Paymentモデルを一つ持っている" do
-      is_expected.to have_one(:payment)
-    end
-
-    it "Cardモデルを一つ持っている" do
-      is_expected.to have_one(:card)
+    context 'Reservationsモデルとの関係' do
+      it '1:Nとなっている' do
+        expect(User.reflect_on_association(:reservations).macro).to eq :has_many
+      end
     end
   end
 
