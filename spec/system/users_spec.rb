@@ -23,4 +23,27 @@ describe 'ユーザー認証のテスト' do
       end
     end
   end
+
+  describe 'ユーザ-ログイン' do
+    let(:user) { create(:user) }
+    before do
+      visit new_user_session_path
+    end
+    context 'ログイン画面に遷移' do
+      let(:test_user) { user }
+      it 'ログインに成功する' do
+        fill_in 'user[email]', with: Faker::Internet.email
+        fill_in 'user[password]', with: 'password'
+        click_button 'ログイン'
+      end
+
+       it 'ログインに失敗する' do
+        fill_in 'user[email]', with: ''
+        fill_in 'user[password]', with: ''
+        click_button 'ログイン'
+      end
+
+    end
+  end
+
 end
